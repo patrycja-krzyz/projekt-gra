@@ -23,3 +23,9 @@ Pygame, Pymunk, Tiled (pytmx), OpenCV, Math, Random, SoundFX/Pygame Mixer, Pathf
 - zaimplementowanie zbierania przedmiotów (np. odblokowujących części mapy, a co za tym idzie, wcześniejsze zablokowanie pewnych przejść aż do zdobycia odpowiednich przedmiotów)
 - przygotowanie grafik (np. w Photoshopie)
 - dodanie menu startowego/końcowego oraz efektów dźwiękowych i muzyki w tle
+### Do grafik użyto:
+- Goodnotes 5 
+- ikony Apple emoji
+- Sketchbook
+- mapa : https://pl.wikipedia.org/wiki/Podział_administracyjny_Wrocławia#/media/Plik:Rozw-teryt-WROC.png
+- fotografie: własne
