@@ -13,7 +13,7 @@ class gracz():
             raise FileNotFoundError(f"Nie znaleziono pliku: {sciezka_do_obrazka}")
         
         self.obraz = pg.image.load(sciezka_do_obrazka).convert_alpha()
-        # self.obraz = pg.transform.scale(self.obraz, (50, 50)) 
+        self.obraz = pg.transform.scale(self.obraz, (50, 50)) 
 
     def ruch(self):
         klawisze = pg.key.get_pressed()
@@ -37,3 +37,6 @@ class gracz():
     
     def aktualizuj(self):
         self.ruch()
+
+    def rysuj(self):
+        self.gra.ekran.blit(self.obraz, (self.x, self.y))

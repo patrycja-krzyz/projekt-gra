@@ -16,21 +16,20 @@ class Gra:
                 pg.quit()
                 sys.exit()
         
-    
     def rysuj(self):
-        self.ekran.fill((0, 0, 0))  
+        self.ekran.fill((255, 255, 255))  
         self.gracz.rysuj()  
         pg.display.flip()  
 
     def aktualizuj(self):
         self.gracz.aktualizuj()
-        self.aktualizuj()
         self.rysuj()
         self.zegar.tick(FPS) 
 
     def graj(self):
         while True:
             self.sprawdz_zdarzenia()
+            self.aktualizuj
 
 if __name__=="__main__":
     gra=Gra()
