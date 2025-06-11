@@ -5,7 +5,7 @@ import os
 class gracz():
     def __init__(self, gra):
         self.gra = gra
-        self.x, self.y = 600, 400
+        self.x, self.y = 700, 400
         self.szybkosc = 5
         sciezka_do_obrazka = os.path.join("zasoby", "spritey", "parszywek1.png")
         
@@ -13,7 +13,7 @@ class gracz():
             raise FileNotFoundError(f"Nie znaleziono pliku: {sciezka_do_obrazka}")
         
         self.obraz = pg.image.load(sciezka_do_obrazka).convert_alpha()
-        self.obraz = pg.transform.scale(self.obraz, (50, 50)) 
+        self.obraz = pg.transform.scale(self.obraz, (70, 90)) 
 
     def ruch(self):
         klawisze = pg.key.get_pressed()

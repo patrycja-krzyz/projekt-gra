@@ -9,6 +9,8 @@ class Gra:
         self.zegar = pg.time.Clock()
         self.delta_czas = 1
         self.gracz = gracz(self)
+        self.tlo = pg.image.load("zasoby/tekstury/staremiasto.png").convert()
+        self.tlo = pg.transform.scale(self.tlo, RES)  
 
     def sprawdz_zdarzenia(self):
         for zdarz in pg.event.get():
@@ -17,9 +19,9 @@ class Gra:
                 sys.exit()
         
     def rysuj(self):
-        self.ekran.fill((255, 255, 255))  
-        self.gracz.rysuj()  
-        pg.display.flip()  
+        self.ekran.blit(self.tlo, (0, 0))  
+        self.gracz.rysuj()                 
+        pg.display.flip() 
 
     def aktualizuj(self):
         self.gracz.aktualizuj()
@@ -29,7 +31,7 @@ class Gra:
     def graj(self):
         while True:
             self.sprawdz_zdarzenia()
-            self.aktualizuj
+            self.aktualizuj()
 
 if __name__=="__main__":
     gra=Gra()
