@@ -15,6 +15,15 @@ class gracz():
         self.obraz = pg.image.load(sciezka_do_obrazka).convert_alpha()
         self.obraz = pg.transform.scale(self.obraz, (70, 90)) 
 
+        self.dozwolony_kolor = (219, 187, 104)
+
+    def czy_moze_isc(self, x, y):
+        try:
+            kolor = self.gra.ekran.get_at((int(x), int(y)))[:3] 
+            return kolor == self.dozwolony_kolor
+        except:
+            return False
+
     def ruch(self):
         klawisze = pg.key.get_pressed()
 
@@ -29,11 +38,18 @@ class gracz():
         elif klawisze[pg.K_d]:  
             dx = self.szybkosc
 
-        self.x += dx
-        self.y += dy
+        nowy_x = self.x + dx
+        nowy_y = self.y + dy
 
         self.x = max(0, min(self.x, 1200))  
         self.y = max(0, min(self.y, 800)) 
+
+        srodek_x = nowy_x + self.obraz.get_width() // 2
+        dol_y = nowy_y + self.obraz.get_height()
+
+        if self.czy_moze_isc(srodek_x, dol_y):
+            self.x, self.y = nowy_x, nowy_y
+
     
     def aktualizuj(self):
         self.ruch()
