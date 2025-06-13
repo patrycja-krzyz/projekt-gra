@@ -7,12 +7,12 @@ class gracz():
         self.gra = gra
         self.x, self.y = 700, 400
         self.szybkosc = 5
-        sciezka_do_obrazka = os.path.join("spritey/parszywek1.png")
+        #sciezka_do_obrazka = os.path.join("spritey/parszywek1.png")
         
-        if not os.path.exists(sciezka_do_obrazka):
-            raise FileNotFoundError(f"Nie znaleziono pliku: {sciezka_do_obrazka}")
+        #if not os.path.exists(sciezka_do_obrazka):
+            #raise FileNotFoundError(f"Nie znaleziono pliku: {sciezka_do_obrazka}")
         
-        self.obraz = pg.image.load(sciezka_do_obrazka).convert_alpha()
+        self.obraz = pg.image.load("zasoby/spritey/parszywek1.png").convert_alpha()
         self.obraz = pg.transform.scale(self.obraz, (70, 90)) 
 
         self.dozwolony_kolor = (219, 187, 104)
@@ -49,7 +49,6 @@ class gracz():
 
         if self.czy_moze_isc(srodek_x, dol_y):
             self.x, self.y = nowy_x, nowy_y
-
     
     def aktualizuj(self):
         self.ruch()
