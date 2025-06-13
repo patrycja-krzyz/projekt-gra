@@ -7,7 +7,7 @@ class gracz():
         self.gra = gra
         self.x, self.y = 700, 400
         self.szybkosc = 5
-        sciezka_do_obrazka = os.path.join("spritey", "parszywek1.png")
+        sciezka_do_obrazka = os.path.join("spritey/parszywek1.png")
         
         if not os.path.exists(sciezka_do_obrazka):
             raise FileNotFoundError(f"Nie znaleziono pliku: {sciezka_do_obrazka}")
