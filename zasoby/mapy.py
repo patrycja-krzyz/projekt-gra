@@ -11,6 +11,7 @@ class Mapa:
         self.gra = gra
         self.polaczenia = {}
         self.przedmioty = []
+        self.psy = []
     
     def dodaj_polaczenie(self, kierunek, indeks_mapy_docelowej):
         self.polaczenia[kierunek] = indeks_mapy_docelowej
