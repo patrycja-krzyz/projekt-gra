@@ -12,7 +12,7 @@ class gracz():
         #if not os.path.exists(sciezka_do_obrazka):
             #raise FileNotFoundError(f"Nie znaleziono pliku: {sciezka_do_obrazka}")
         
-        self.obraz = pg.image.load("zasoby/spritey/parszywek1.png").convert_alpha()
+        self.obraz = pg.image.load("spritey/parszywek1.png").convert_alpha()
         self.obraz = pg.transform.scale(self.obraz, (70, 90)) 
 
         self.dozwolony_kolor = (219, 187, 104)
