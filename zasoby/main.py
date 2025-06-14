@@ -15,9 +15,15 @@ class Gra:
         self.tlo = pg.image.load("tekstury/staremiasto.png").convert()
         # self.tlo = pg.image.load("zasoby/tekstury/staremiasto.png").convert()
         self.tlo = pg.transform.scale(self.tlo, RES) 
+        self.ui_obraz = pg.image.load("spritey/energia.png").convert_alpha()
+        self.ui_obraz = pg.transform.scale(self.ui_obraz, (300, 150))
         self.przedmioty = [
-           # Przedmiot(self,300,300, "tort.png")
-        ] 
+            #Przedmiot(self,700,300, "tort.png"),
+            #Przedmiot(self,700,400, "ser.png"), 
+            #Przedmiot(self,950,700, "ksiazka.png")
+            
+            
+       ] 
         # self.mapki = [
         #     pg.transform.scale(pg.image.load("zasoby/tekstury/staremiasto.png").convert(), RES),
         #     pg.transform.scale(pg.image.load("zasoby/tekstury/dworzec.png").convert(), RES),
@@ -61,6 +67,34 @@ class Gra:
 
 
 
+    def rysuj_interfejs(self):
+        ui_x, ui_y = 0, WYSOKOSC - self.ui_obraz.get_height()
+        self.ekran.blit(self.ui_obraz, (ui_x, ui_y))
+        pasek_x = ui_x + 142
+        pasek_y = ui_y + 13
+        maks_szerokosc = 137
+        wysokosc_paska = 30
+        energia = max(0, min(100, self.gracz.energia))
+        aktualna_szerokosc = int(maks_szerokosc * energia / 100)
+        if energia > 60:
+            kolor_paska = (0, 255, 0) #zielony
+        elif energia > 30:
+            kolor_paska = (255, 165, 0) #pomarańczowy
+        else:
+            kolor_paska = (255, 0, 0) #czerwony
+
+        pg.draw.rect(self.ekran, (50, 50, 50), (pasek_x, pasek_y, maks_szerokosc, wysokosc_paska))
+        pg.draw.rect(self.ekran, kolor_paska, (pasek_x, pasek_y, aktualna_szerokosc, wysokosc_paska))
+
+        start_x = ui_x + 180
+        start_y = ui_y + 90
+        for i, obraz in enumerate(self.gracz.przedmioty_zebrane):
+            miniatura = pg.transform.scale(obraz, (30, 30))
+            self.ekran.blit(miniatura, (start_x + i * 35, start_y))
+
+
+
+
 
     def sprawdz_zdarzenia(self):
         for zdarz in pg.event.get():
@@ -81,7 +115,8 @@ class Gra:
             przedmiot.rysuj()
         for pies in self.mapy[self.aktualna_mapa].psy:
             pies.rysuj()
-        self.gracz.rysuj()                 
+        self.gracz.rysuj()
+        self.rysuj_interfejs()                 
         pg.display.flip() 
 
     def aktualizuj(self):
@@ -96,6 +131,8 @@ class Gra:
         while True:
             self.sprawdz_zdarzenia()
             self.aktualizuj()
+
+    
             
 
 if __name__=="__main__":
