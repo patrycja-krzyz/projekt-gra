@@ -15,7 +15,9 @@ Zdecydowałyśmy się na taki projekt ze względu na nostalgię związaną z tą
 pygame, math, os, sys
 
 ---
-
+![Diagram UML](diagram.png)
+## do diagramu użyto: 
+https://www.plantuml.com/plantuml/uml/SyfFKj2rKt3CoKnELR1Io4ZDoSa700003 
 ### Zadania do wykonania:
 
 - zaimplementowanie ruchu Parszywka i sterowania z klawiatury (lewo, prawo, góra, dół)
