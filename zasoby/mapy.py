@@ -17,6 +17,9 @@ class Mapa:
 
     def dodaj_przedmiot(self, przedmiot):
         self.przedmioty.append(przedmiot)
+        
+    def dodaj_psa(self, pies):
+        self.psy.append(pies)
     
     def sprawdz_krawedzie(self):
         gracz = self.gra.gracz
