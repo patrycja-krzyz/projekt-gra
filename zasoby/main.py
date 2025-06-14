@@ -3,6 +3,7 @@ import sys
 from przedmioty import Przedmiot 
 from gracz import *
 from mapy import *
+from wsciekly_pies import *
 
 class Gra: 
     def __init__(self):
@@ -78,12 +79,16 @@ class Gra:
         self.ekran.blit(self.tlo, (0, 0)) 
         for przedmiot in self.przedmioty:
             przedmiot.rysuj()
+        for pies in self.mapy[self.aktualna_mapa].psy:
+            pies.rysuj()
         self.gracz.rysuj()                 
         pg.display.flip() 
 
     def aktualizuj(self):
         self.gracz.aktualizuj()
         self.rysuj()
+        for pies in self.mapy[self.aktualna_mapa].psy:
+            pies.aktualizuj()
         self.mapy[self.aktualna_mapa].sprawdz_krawedzie()
         self.zegar.tick(FPS) 
 
