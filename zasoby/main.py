@@ -2,7 +2,7 @@ from silnik import *
 import sys
 from przedmioty import Przedmiot 
 from gracz import *
-from mapa import *
+from mapy import *
 
 class Gra: 
     def __init__(self):

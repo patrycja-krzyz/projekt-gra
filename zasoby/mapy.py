@@ -10,6 +10,7 @@ class Mapa:
         self.tekstura = tekstura
         self.gra = gra
         self.polaczenia = {}
+        self.przedmioty = []
     
     def dodaj_polaczenie(self, kierunek, indeks_mapy_docelowej):
         self.polaczenia[kierunek] = indeks_mapy_docelowej
