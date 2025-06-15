@@ -12,42 +12,41 @@ class Gra:
         self.zegar = pg.time.Clock()
         self.delta_czas = 1
         self.gracz = gracz(self)
-        self.tlo = pg.image.load("tekstury/staremiasto.png").convert()
+        self.tlo = pg.image.load("zasoby/tekstury/staremiasto.png").convert()
         # self.tlo = pg.image.load("zasoby/tekstury/staremiasto.png").convert()
         self.tlo = pg.transform.scale(self.tlo, RES) 
-        self.ui_obraz = pg.image.load("spritey/energia.png").convert_alpha()
+        self.ui_obraz = pg.image.load("zasoby/spritey/energia.png").convert_alpha()
         self.ui_obraz = pg.transform.scale(self.ui_obraz, (300, 150))
         self.przedmioty = [
             #Przedmiot(self,700,300, "tort.png"),
             #Przedmiot(self,700,400, "ser.png"), 
             #Przedmiot(self,950,700, "ksiazka.png")
             
-            
        ] 
-        # self.mapki = [
-        #     pg.transform.scale(pg.image.load("zasoby/tekstury/staremiasto.png").convert(), RES),
-        #     pg.transform.scale(pg.image.load("zasoby/tekstury/dworzec.png").convert(), RES),
-        #     pg.transform.scale(pg.image.load("zasoby/tekstury/jakgrac.png").convert(), RES),
-        #     pg.transform.scale(pg.image.load("zasoby/tekstury/krzyki.png").convert(), RES),
-        #     pg.transform.scale(pg.image.load("zasoby/tekstury/mapa.png").convert(), RES),
-        #     pg.transform.scale(pg.image.load("zasoby/tekstury/Nadodrze.png").convert(), RES),
-        #     pg.transform.scale(pg.image.load("zasoby/tekstury/placgrunwaldzki.png").convert(), RES),
-        #     pg.transform.scale(pg.image.load("zasoby/tekstury/pustystarter.png").convert(), RES),
-        #     pg.transform.scale(pg.image.load("zasoby/tekstury/starter.png").convert(), RES),
-        #     pg.transform.scale(pg.image.load("zasoby/tekstury/zoo.png").convert(), RES),
-        # ]
         self.mapki = [
-            pg.transform.scale(pg.image.load("tekstury/staremiasto.png").convert(), RES),
-            pg.transform.scale(pg.image.load("tekstury/dworzec.png").convert(), RES),
-            pg.transform.scale(pg.image.load("tekstury/jakgrac.png").convert(), RES),
-            pg.transform.scale(pg.image.load("tekstury/krzyki.png").convert(), RES),
-            pg.transform.scale(pg.image.load("tekstury/mapa.png").convert(), RES),
-            pg.transform.scale(pg.image.load("tekstury/Nadodrze.png").convert(), RES),
-            pg.transform.scale(pg.image.load("tekstury/placgrunwaldzki.png").convert(), RES),
-            pg.transform.scale(pg.image.load("tekstury/pustystarter.png").convert(), RES),
-            pg.transform.scale(pg.image.load("tekstury/starter.png").convert(), RES),
-            pg.transform.scale(pg.image.load("tekstury/zoo.png").convert(), RES),
-        ]
+             pg.transform.scale(pg.image.load("zasoby/tekstury/staremiasto.png").convert(), RES),
+             pg.transform.scale(pg.image.load("zasoby/tekstury/dworzec.png").convert(), RES),
+             pg.transform.scale(pg.image.load("zasoby/tekstury/jakgrac.png").convert(), RES),
+             pg.transform.scale(pg.image.load("zasoby/tekstury/krzyki.png").convert(), RES),
+             pg.transform.scale(pg.image.load("zasoby/tekstury/mapa.png").convert(), RES),
+             pg.transform.scale(pg.image.load("zasoby/tekstury/Nadodrze.png").convert(), RES),
+             pg.transform.scale(pg.image.load("zasoby/tekstury/placgrunwaldzki.png").convert(), RES),
+             pg.transform.scale(pg.image.load("zasoby/tekstury/pustystarter.png").convert(), RES),
+             pg.transform.scale(pg.image.load("zasoby/tekstury/starter.png").convert(), RES),
+             pg.transform.scale(pg.image.load("zasoby/tekstury/zoo.png").convert(), RES),
+         ]
+        #self.mapki = [
+        #    pg.transform.scale(pg.image.load("tekstury/staremiasto.png").convert(), RES),
+        #   pg.transform.scale(pg.image.load("tekstury/dworzec.png").convert(), RES),
+        #    pg.transform.scale(pg.image.load("tekstury/jakgrac.png").convert(), RES),
+        #    pg.transform.scale(pg.image.load("tekstury/krzyki.png").convert(), RES),
+        #   pg.transform.scale(pg.image.load("tekstury/mapa.png").convert(), RES),
+        #   pg.transform.scale(pg.image.load("tekstury/Nadodrze.png").convert(), RES),
+        #   pg.transform.scale(pg.image.load("tekstury/placgrunwaldzki.png").convert(), RES),
+        #   pg.transform.scale(pg.image.load("tekstury/pustystarter.png").convert(), RES),
+        #   pg.transform.scale(pg.image.load("tekstury/starter.png").convert(), RES),
+        #   pg.transform.scale(pg.image.load("tekstury/zoo.png").convert(), RES),
+        #]
         
         self.mapy = [
             Mapa(0, self.mapki[0], self),
@@ -56,16 +55,26 @@ class Gra:
             Mapa(3, self.mapki[3], self),
             Mapa(4, self.mapki[4], self),
             Mapa(5, self.mapki[5], self),
-            Mapa(6, self.mapki[6], self)
+            Mapa(6, self.mapki[6], self),
+            Mapa(7, self.mapki[7], self),
+            Mapa(8, self.mapki[8], self),
+            Mapa(9, self.mapki[9], self)
         ]
 
         self.mapy[0].dodaj_polaczenie("gora", 5)
+        self.mapy[0].dodaj_polaczenie("dol", 1)
+        self.mapy[1].dodaj_polaczenie("dol", 3)
+        self.mapy[3].dodaj_polaczenie("gora", 1)
+        self.mapy[1].dodaj_polaczenie("gora", 0)
+        self.mapy[5].dodaj_polaczenie("dol", 0)
+        self.mapy[0].dodaj_polaczenie("prawo", 6)
+        self.mapy[6].dodaj_polaczenie("lewo", 0)
+        self.mapy[6].dodaj_polaczenie("gora", 9)
+        self.mapy[9].dodaj_polaczenie("dol", 6)
         #tu można dodać więcej połączeń i przedmioty
 
         self.aktualna_mapa = 0
         self.tlo = self.mapy[self.aktualna_mapa].tekstura 
-
-
 
     def rysuj_interfejs(self):
         ui_x, ui_y = 0, WYSOKOSC - self.ui_obraz.get_height()
@@ -92,10 +101,6 @@ class Gra:
             miniatura = pg.transform.scale(obraz, (30, 30))
             self.ekran.blit(miniatura, (start_x + i * 35, start_y))
 
-
-
-
-
     def sprawdz_zdarzenia(self):
         for zdarz in pg.event.get():
             if zdarz.type == pg.QUIT or (zdarz.type == pg.KEYDOWN and zdarz.key == pg.K_ESCAPE):
@@ -107,7 +112,6 @@ class Gra:
                         if przedmiot.sprawdz_kolizje_z_graczem() and not przedmiot.podniesiony:
                             przedmiot.podnies()
                             print("Przedmiot podniesiony!")
-
 
     def rysuj(self):
         self.ekran.blit(self.tlo, (0, 0)) 
@@ -131,10 +135,7 @@ class Gra:
         while True:
             self.sprawdz_zdarzenia()
             self.aktualizuj()
-
-    
-            
-
+ 
 if __name__=="__main__":
     gra=Gra()
     gra.graj()
