@@ -28,4 +28,6 @@ class Przedmiot:
 
     def podnies(self):
         self.podniesiony = True
+        self.gra.gracz.przedmioty_zebrane.append(self.obraz)
+        self.gra.gracz.energia = min(100, self.gra.gracz.energia + 10)
        

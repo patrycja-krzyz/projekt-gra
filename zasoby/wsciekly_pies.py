@@ -40,8 +40,10 @@ class WscieklyPies:
         
         
         if self.sprawdz_kolizje_z_graczem():
-            self.gra.gracz.energia -= 10
-            print("Pies ugryzł gracza! -10 energii")
+            if self.sprawdz_kolizje_z_graczem():
+                self.gra.gracz.energia = max(0, self.gra.gracz.energia - 10)
+                print("Pies ugryzł gracza! -10 energii")
+
     
     def sprawdz_kolizje_z_graczem(self):
         gracz_rect = pg.Rect(self.gra.gracz.x, self.gra.gracz.y, 
