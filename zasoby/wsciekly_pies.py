@@ -56,7 +56,7 @@ class WscieklyPies:
             self.zakoncz_atak()
 
 
-     def rozpocznij_atak(self, czas):
+    def rozpocznij_atak(self, czas):
         self.aktywny_atak = True
         self.czas_ostatniego_ataku = czas
         self.zadaj_obrazenia()
