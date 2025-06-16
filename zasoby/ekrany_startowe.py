@@ -60,3 +60,20 @@ class ekran_jakgrac:
     def rysuj(self):
         self.gra.ekran.blit(self.tlo, (0, 0))
         pg.display.flip()
+
+
+class mapa_wro():
+    def __init__(self, gra):
+        self.gra = gra 
+        self.tlo = pg.transform.scale(pg.image.load("tekstury/mapa.png").convert(), RES)
+
+    def sprawdz_zdarzenia(self):
+        for zdarz in pg.event.get():
+            if zdarz.type == pg.KEYDOWN:
+                if zdarz.key == pg.K_m:
+                    self.gra.stan_gry = "gra"
+        return None 
+
+    def rysuj(self):
+        self.gra.ekran.blit(self.tlo, (0, 0))
+        pg.display.flip()

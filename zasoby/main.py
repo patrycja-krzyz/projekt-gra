@@ -1,10 +1,11 @@
+
 from silnik import *
 import sys
 from przedmioty import Przedmiot 
 from gracz import *
 from mapy import *
 from wsciekly_pies import *
-from ekrany_startowe import *
+from ekrany_startowe_i_mapa import *
 
 class Gra: 
     def __init__(self):
@@ -14,6 +15,7 @@ class Gra:
         self.delta_czas = 1
         self.ekran_startowy = ekran_startowy(self)
         self.ekran_jakgrac = ekran_jakgrac(self)
+        self.mapa_wro = mapa_wro(self) 
         self.stan_gry = "start"
         self.gracz = gracz(self)
         self.ui_obraz = pg.image.load("spritey/energia.png").convert_alpha()
@@ -43,6 +45,7 @@ class Gra:
             pg.transform.scale(pg.image.load("tekstury/pustystarter.png").convert(), RES),   #7
             pg.transform.scale(pg.image.load("tekstury/starter.png").convert(), RES),        #8
             pg.transform.scale(pg.image.load("tekstury/zoo.png").convert(), RES),            #9
+            pg.transform.scale(pg.image.load("tekstury/niepolda.png").convert(), RES)
         ]
         
         self.mapy = [
@@ -55,7 +58,8 @@ class Gra:
             Mapa(6, self.mapki[6], self),
             Mapa(7, self.mapki[7], self),
             Mapa(8, self.mapki[8], self),
-            Mapa(9, self.mapki[9], self)
+            Mapa(9, self.mapki[9], self),
+            Mapa(10, self.mapki[10], self)
         ]
 
         self.mapy[0].dodaj_polaczenie("gora", 5)
@@ -68,8 +72,9 @@ class Gra:
         self.mapy[6].dodaj_polaczenie("lewo", 0)
         self.mapy[6].dodaj_polaczenie("gora", 9)
         self.mapy[9].dodaj_polaczenie("dol", 6)
-        #tu można dodać więcej połączeń i przedmioty
- 
+        self.mapy[0].dodaj_polaczenie("lewo", 10)
+        self.mapy[10].dodaj_polaczenie("prawo", 0)
+        #tu można dodać więcej połączeń, przedmioty i psów
 
     def rysuj_interfejs(self):
         ui_x, ui_y = 0, WYSOKOSC - self.ui_obraz.get_height()
@@ -107,6 +112,8 @@ class Gra:
                         if przedmiot.sprawdz_kolizje_z_graczem() and not przedmiot.podniesiony:
                             przedmiot.podnies()
                             print("Przedmiot podniesiony!")
+                elif zdarz.key == pg.K_m: 
+                   self.stan_gry = "mapa" 
 
     
     def rysuj(self):
@@ -133,9 +140,11 @@ class Gra:
                 self.ekran_startowy.rysuj()
                 self.ekran_startowy.sprawdz_zdarzenia()
             if self.stan_gry == "jakgrac":
-                self.tlo = self.ekran_jakgrac
                 self.ekran_jakgrac.rysuj()
                 self.ekran_jakgrac.sprawdz_zdarzenia()
+            if self.stan_gry == "mapa":
+                self.mapa_wro.rysuj()
+                self.mapa_wro.sprawdz_zdarzenia() 
             if self.stan_gry == "gra":
                 self.sprawdz_zdarzenia()
                 self.aktualizuj()
