@@ -33,13 +33,13 @@ class gracz():
 
         dx, dy = 0, 0
         
-        if klawisze[pg.K_w]:  
+        if klawisze[pg.K_UP]:  
             dy = -self.szybkosc
-        elif klawisze[pg.K_s]:  
+        elif klawisze[pg.K_DOWN]:  
             dy = self.szybkosc
-        elif klawisze[pg.K_a]:  
+        elif klawisze[pg.K_LEFT]:  
             dx = -self.szybkosc
-        elif klawisze[pg.K_d]:  
+        elif klawisze[pg.K_RIGHT]:  
             dx = self.szybkosc
 
         nowy_x = self.x + dx

@@ -1,11 +1,11 @@
 
 from silnik import *
 import sys
-from przedmioty import Przedmiot 
+from przedmioty import * 
 from gracz import *
 from mapy import *
 from wsciekly_pies import *
-from ekrany_startowe_i_mapa import *
+from ekrany_startowe import *
 
 class Gra: 
     def __init__(self):
@@ -22,7 +22,7 @@ class Gra:
         self.ui_obraz = pg.transform.scale(self.ui_obraz, (300, 150))
         self.aktualna_mapa = 0
 
-        # self.mapki = [
+        #self.mapki = [
         #      pg.transform.scale(pg.image.load("zasoby/tekstury/staremiasto.png").convert(), RES),
         #      pg.transform.scale(pg.image.load("zasoby/tekstury/dworzec.png").convert(), RES),
         #      pg.transform.scale(pg.image.load("zasoby/tekstury/jakgrac.png").convert(), RES),
@@ -33,7 +33,8 @@ class Gra:
         #      pg.transform.scale(pg.image.load("zasoby/tekstury/pustystarter.png").convert(), RES),
         #      pg.transform.scale(pg.image.load("zasoby/tekstury/starter.png").convert(), RES),
         #      pg.transform.scale(pg.image.load("zasoby/tekstury/zoo.png").convert(), RES),
-        #  ]
+        #     pg.transform.scale(pg.image.load("zasoby/tekstury/niepolda.png").convert(), RES)
+        # ]
         self.mapki = [
             pg.transform.scale(pg.image.load("tekstury/staremiasto.png").convert(), RES),    #0
             pg.transform.scale(pg.image.load("tekstury/dworzec.png").convert(), RES),        #1
@@ -118,8 +119,8 @@ class Gra:
     
     def rysuj(self):
         self.ekran.blit(self.tlo, (0, 0)) 
-        # for przedmiot in self.przedmioty:
-        #     przedmiot.rysuj()
+        #for przedmiot in self.przedmioty:
+        #   przedmiot.rysuj()
         for pies in self.mapy[self.aktualna_mapa].psy:
             pies.rysuj()
         self.gracz.rysuj()

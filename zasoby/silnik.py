@@ -1,8 +1,6 @@
 import pygame as pg
 from ustawienia import *
 
-
-
 class silnik:
     def __init__(self,gra):
         self.gra=gra

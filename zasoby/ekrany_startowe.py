@@ -5,11 +5,11 @@ class ekran_startowy():
     
     def __init__(self, gra):
         self.gra = gra 
-        self.tlo = pg.transform.scale(pg.image.load("tekstury/starter.png").convert(), RES)
-        self.przycisk_startu = pg.image.load("spritey/rozpocznijgre_sprite.png").convert_alpha()
+        self.tlo = pg.transform.scale(pg.image.load("zasoby/tekstury/starter.png").convert(), RES)
+        self.przycisk_startu = pg.image.load("zasoby/spritey/rozpocznijgre_sprite.png").convert_alpha()
         self.przycisk_startu = pg.transform.scale(self.przycisk_startu, (150, 130))
         self.start_rect = self.przycisk_startu.get_rect(topleft=(400, 580))
-        self.przycisk_jakgrac = pg.image.load("spritey/jakgrac_sprite.png").convert_alpha()
+        self.przycisk_jakgrac = pg.image.load("zasoby/spritey/jakgrac_sprite.png").convert_alpha()
         self.przycisk_jakgrac = pg.transform.scale(self.przycisk_jakgrac, (150, 130))
         self.jakgrac_rect = self.przycisk_jakgrac.get_rect(topleft=(660, 580))
 
@@ -40,7 +40,7 @@ class ekran_jakgrac:
     
     def __init__(self, gra):
         self.gra = gra 
-        self.tlo = pg.transform.scale(pg.image.load("tekstury/jakgrac.png").convert(), RES)
+        self.tlo = pg.transform.scale(pg.image.load("zasoby/tekstury/jakgrac.png").convert(), RES)
         self.start_rect = pg.Rect(930, 640, 160, 150)
 
     def sprawdz_zdarzenia(self):
@@ -65,7 +65,7 @@ class ekran_jakgrac:
 class mapa_wro():
     def __init__(self, gra):
         self.gra = gra 
-        self.tlo = pg.transform.scale(pg.image.load("tekstury/mapa.png").convert(), RES)
+        self.tlo = pg.transform.scale(pg.image.load("zasoby/tekstury/mapa.png").convert(), RES)
 
     def sprawdz_zdarzenia(self):
         for zdarz in pg.event.get():
