@@ -115,7 +115,13 @@ class Gra:
                             przedmiot.podnies()
                             print("Przedmiot podniesiony!")
                 elif zdarz.key == pg.K_m: 
-                   self.stan_gry = "mapa" 
+                   self.stan_gry = "mapa"
+            elif zdarz.type == pg.USEREVENT:
+                for pies in self.mapy[self.aktualna_mapa].psy:
+                    pies.calkowite_obrazenia = 0
+                self.gracz.obraz = pg.image.load("spritey/parszywek1.png").convert_alpha()
+                self.gracz.obraz = pg.transform.scale(self.gracz.obraz, (70, 90))
+        
 
     
     def rysuj(self):
