@@ -101,6 +101,24 @@ class Gra:
             miniatura = pg.transform.scale(obraz, (30, 30))
             self.ekran.blit(miniatura, (start_x + i * 35, start_y))
 
+    def zmien_mape(self, dx=0, dy=0):
+    # Przykład: wyobrażamy sobie mapy jako siatkę 2x5: 2 wiersze po 5 mapek
+    MAPY_WIERSZ = 5  # zmień to, jeśli masz inny układ
+
+    kolumna = self.indeks_mapy % MAPY_WIERSZ
+    wiersz = self.indeks_mapy // MAPY_WIERSZ
+
+    nowa_kolumna = kolumna + dx
+    nowy_wiersz = wiersz + dy
+
+    if 0 <= nowa_kolumna < MAPY_WIERSZ and 0 <= nowy_wiersz < (len(self.mapki) // MAPY_WIERSZ):
+        self.indeks_mapy = nowy_wiersz * MAPY_WIERSZ + nowa_kolumna
+        self.tlo = self.mapki[self.indeks_mapy]
+        print(f"Zmieniono mapę na indeks {self.indeks_mapy}")
+    else:
+        print("Nie można przejść dalej — brak mapy w tym kierunku.")
+
+
     def sprawdz_zdarzenia(self):
         for zdarz in pg.event.get():
             if zdarz.type == pg.QUIT or (zdarz.type == pg.KEYDOWN and zdarz.key == pg.K_ESCAPE):

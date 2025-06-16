@@ -54,10 +54,26 @@ class gracz():
         if self.czy_moze_isc(srodek_x, dol_y):
             self.x, self.y = nowy_x, nowy_y
 
+<<<<<<< Updated upstream
         if self.x != nowy_x or self.y != nowy_y:
             self.energia = max(0, self.energia - 0.05)  
 
     
+=======
+        if self.x + self.obraz.get_width() >= 1200:
+            self.gra.zmien_mape(dx=1)
+            self.x = 0
+        elif self.x <= 0:
+            self.gra.zmien_mape(dx=-1)
+            self.x = 1200 - self.obraz.get_width()
+        elif self.y + self.obraz.get_height() >= 800:
+            self.gra.zmien_mape(dy=1)
+            self.y = 0
+        elif self.y <= 0:
+            self.gra.zmien_mape(dy=-1)
+            self.y = 800 - self.obraz.get_height()
+            
+>>>>>>> Stashed changes
     def aktualizuj(self):
         self.ruch()
 
