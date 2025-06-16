@@ -11,6 +11,7 @@ class Gra:
     def __init__(self):
         pg.init()
         self.ekran = pg.display.set_mode(RES)
+        pg.display.set_caption("Parszywek we Wrocławiu")
         self.zegar = pg.time.Clock()
         self.delta_czas = 1
         self.ekran_startowy = ekran_startowy(self)
