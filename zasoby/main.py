@@ -1,4 +1,3 @@
-
 from silnik import *
 import sys
 from przedmioty import * 
@@ -8,8 +7,9 @@ from wsciekly_pies import *
 from ekrany_startowe import *
 
 class Gra: 
-    def __init__(self):
+    def __init__(self, silnik):
         pg.init()
+        self.silnik = silnik
         self.ekran = pg.display.set_mode(RES)
         pg.display.set_caption("Parszywek we Wrocławiu")
         self.zegar = pg.time.Clock()
@@ -19,50 +19,11 @@ class Gra:
         self.mapa_wro = mapa_wro(self) 
         self.stan_gry = "start"
         self.gracz = gracz(self)
-        self.ui_obraz = pg.image.load("spritey/energia.png").convert_alpha()
-        self.ui_obraz = pg.transform.scale(self.ui_obraz, (300, 150))
+        self.ui_obraz = self.silnik.ui_obraz
         self.aktualna_mapa = 0
+        self.mapy = [Mapa(i, mapa, self) for i, mapa in enumerate(self.silnik.mapki)]
 
-        #self.mapki = [
-        #      pg.transform.scale(pg.image.load("zasoby/tekstury/staremiasto.png").convert(), RES),
-        #      pg.transform.scale(pg.image.load("zasoby/tekstury/dworzec.png").convert(), RES),
-        #      pg.transform.scale(pg.image.load("zasoby/tekstury/jakgrac.png").convert(), RES),
-        #      pg.transform.scale(pg.image.load("zasoby/tekstury/krzyki.png").convert(), RES),
-        #      pg.transform.scale(pg.image.load("zasoby/tekstury/mapa.png").convert(), RES),
-        #      pg.transform.scale(pg.image.load("zasoby/tekstury/Nadodrze.png").convert(), RES),
-        #      pg.transform.scale(pg.image.load("zasoby/tekstury/placgrunwaldzki.png").convert(), RES),
-        #      pg.transform.scale(pg.image.load("zasoby/tekstury/pustystarter.png").convert(), RES),
-        #      pg.transform.scale(pg.image.load("zasoby/tekstury/starter.png").convert(), RES),
-        #      pg.transform.scale(pg.image.load("zasoby/tekstury/zoo.png").convert(), RES),
-        #     pg.transform.scale(pg.image.load("zasoby/tekstury/niepolda.png").convert(), RES)
-        # ]
-        self.mapki = [
-            pg.transform.scale(pg.image.load("tekstury/staremiasto.png").convert(), RES),    #0
-            pg.transform.scale(pg.image.load("tekstury/dworzec.png").convert(), RES),        #1
-            pg.transform.scale(pg.image.load("tekstury/jakgrac.png").convert(), RES),        #2
-            pg.transform.scale(pg.image.load("tekstury/krzyki.png").convert(), RES),         #3
-            pg.transform.scale(pg.image.load("tekstury/mapa.png").convert(), RES),           #4
-            pg.transform.scale(pg.image.load("tekstury/Nadodrze.png").convert(), RES),       #5
-            pg.transform.scale(pg.image.load("tekstury/placgrunwaldzki.png").convert(), RES),#6
-            pg.transform.scale(pg.image.load("tekstury/pustystarter.png").convert(), RES),   #7
-            pg.transform.scale(pg.image.load("tekstury/starter.png").convert(), RES),        #8
-            pg.transform.scale(pg.image.load("tekstury/zoo.png").convert(), RES),            #9
-            pg.transform.scale(pg.image.load("tekstury/niepolda.png").convert(), RES)
-        ]
-        
-        self.mapy = [
-            Mapa(0, self.mapki[0], self),
-            Mapa(1, self.mapki[1], self),
-            Mapa(2, self.mapki[2], self),
-            Mapa(3, self.mapki[3], self),
-            Mapa(4, self.mapki[4], self),
-            Mapa(5, self.mapki[5], self),
-            Mapa(6, self.mapki[6], self),
-            Mapa(7, self.mapki[7], self),
-            Mapa(8, self.mapki[8], self),
-            Mapa(9, self.mapki[9], self),
-            Mapa(10, self.mapki[10], self)
-        ]
+
 
         self.mapy[0].dodaj_polaczenie("gora", 5)
         self.mapy[0].dodaj_polaczenie("dol", 1)
@@ -184,7 +145,9 @@ class Gra:
                 self.sprawdz_zdarzenia()
                 self.aktualizuj()
  
-if __name__=="__main__":
-    gra=Gra()
+if __name__ == "__main__":
+    silnik = Silnik()
+    gra = Gra(silnik)
     gra.graj()
+
     
