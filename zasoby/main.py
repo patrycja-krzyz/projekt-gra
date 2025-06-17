@@ -11,6 +11,7 @@ class Gra:
         pg.init()
         self.silnik = silnik
         self.ekran = pg.display.set_mode(RES)
+        self.silnik.wczytaj_teksty()
         pg.display.set_caption("Parszywek we Wrocławiu")
         self.zegar = pg.time.Clock()
         self.delta_czas = 1
@@ -66,31 +67,7 @@ class Gra:
 
         #tu można dodać więcej połączeń, przedmioty i psów
 
-    def rysuj_interfejs(self):
-        ui_x, ui_y = 0, WYSOKOSC - self.ui_obraz.get_height()
-        self.ekran.blit(self.ui_obraz, (ui_x, ui_y))
-        pasek_x = ui_x + 142
-        pasek_y = ui_y + 13
-        maks_szerokosc = 137
-        wysokosc_paska = 30
-        energia = max(0, min(100, self.gracz.energia))
-        aktualna_szerokosc = int(maks_szerokosc * energia / 100)
-        if energia > 60:
-            kolor_paska = (0, 255, 0) #zielony
-        elif energia > 30:
-            kolor_paska = (255, 165, 0) #pomarańczowy
-        else:
-            kolor_paska = (255, 0, 0) #czerwony
-
-        pg.draw.rect(self.ekran, (50, 50, 50), (pasek_x, pasek_y, maks_szerokosc, wysokosc_paska))
-        pg.draw.rect(self.ekran, kolor_paska, (pasek_x, pasek_y, aktualna_szerokosc, wysokosc_paska))
-
-        start_x = ui_x + 180
-        start_y = ui_y + 90
-        for i, obraz in enumerate(self.gracz.przedmioty_zebrane):
-            miniatura = pg.transform.scale(obraz, (30, 30))
-            self.ekran.blit(miniatura, (start_x + i * 35, start_y))
-
+    
     def sprawdz_zdarzenia(self):
         for zdarz in pg.event.get():
             if zdarz.type == pg.QUIT or (zdarz.type == pg.KEYDOWN and zdarz.key == pg.K_ESCAPE):
@@ -119,7 +96,7 @@ class Gra:
         for pies in self.mapy[self.aktualna_mapa].psy:
             pies.rysuj()
         self.gracz.rysuj()
-        self.rysuj_interfejs()                 
+        self.silnik.rysuj_interfejs(self.ekran, self.gracz) ##self.rysuj_interfejs() wczesniej                 
         pg.display.flip() 
 
     def aktualizuj(self):
