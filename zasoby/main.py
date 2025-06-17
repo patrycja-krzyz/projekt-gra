@@ -10,7 +10,7 @@ class Gra:
     def __init__(self, silnik):
         pg.init()
         self.silnik = silnik
-        self.ekran = pg.display.set_mode(RES)
+        self.ekran = self.silnik.ekran
         self.silnik.wczytaj_teksty()
         pg.display.set_caption("Parszywek we Wrocławiu")
         self.zegar = pg.time.Clock()
@@ -19,7 +19,7 @@ class Gra:
         self.ekran_jakgrac = ekran_jakgrac(self)
         self.mapa_wro = mapa_wro(self) 
         self.stan_gry = "start"
-        self.gracz = gracz(self)
+        self.gracz = self.silnik.gracz
         self.ui_obraz = self.silnik.ui_obraz
         self.aktualna_mapa = 0
         self.mapy = [Mapa(i, mapa, self) for i, mapa in enumerate(self.silnik.mapki)]

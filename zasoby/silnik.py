@@ -1,26 +1,29 @@
 import pygame as pg
 from ustawienia import *
+from gracz import *
 
 import pygame as pg
 
 class Silnik:
     def __init__(self):
+        self.ekran = pg.display.set_mode(RES)
         ##self.wczytaj_teksty()
         self.wczytaj_ui()
+        self.gracz = gracz(self)
 
     def wczytaj_teksty(self):
         self.mapki = [
-            pg.transform.scale(pg.image.load("tekstury/staremiasto.png").convert(), (1280, 720)),
-            pg.transform.scale(pg.image.load("tekstury/dworzec.png").convert(), (1280, 720)),
-            pg.transform.scale(pg.image.load("tekstury/jakgrac.png").convert(), (1280, 720)),
-            pg.transform.scale(pg.image.load("tekstury/krzyki.png").convert(), (1280, 720)),
-            pg.transform.scale(pg.image.load("tekstury/mapa.png").convert(), (1280, 720)),
-            pg.transform.scale(pg.image.load("tekstury/Nadodrze.png").convert(), (1280, 720)),
-            pg.transform.scale(pg.image.load("tekstury/placgrunwaldzki.png").convert(), (1280, 720)),
-            pg.transform.scale(pg.image.load("tekstury/pustystarter.png").convert(), (1280, 720)),
-            pg.transform.scale(pg.image.load("tekstury/starter.png").convert(), (1280, 720)),
-            pg.transform.scale(pg.image.load("tekstury/zoo.png").convert(), (1280, 720)),
-            pg.transform.scale(pg.image.load("tekstury/niepolda.png").convert(), (1280, 720))
+            pg.transform.scale(pg.image.load("tekstury/staremiasto.png").convert(), RES),
+            pg.transform.scale(pg.image.load("tekstury/dworzec.png").convert(), RES),
+            pg.transform.scale(pg.image.load("tekstury/jakgrac.png").convert(), RES),
+            pg.transform.scale(pg.image.load("tekstury/krzyki.png").convert(), RES),
+            pg.transform.scale(pg.image.load("tekstury/mapa.png").convert(), RES),
+            pg.transform.scale(pg.image.load("tekstury/Nadodrze.png").convert(), RES),
+            pg.transform.scale(pg.image.load("tekstury/placgrunwaldzki.png").convert(), RES),
+            pg.transform.scale(pg.image.load("tekstury/pustystarter.png").convert(), RES),
+            pg.transform.scale(pg.image.load("tekstury/starter.png").convert(), RES),
+            pg.transform.scale(pg.image.load("tekstury/zoo.png").convert(), RES),
+            pg.transform.scale(pg.image.load("tekstury/niepolda.png").convert(), RES)
         ]
         
         #self.mapki = [
@@ -41,7 +44,7 @@ class Silnik:
         self.ui_obraz = pg.image.load("spritey/energia.png").convert_alpha()
         #self.ui_obraz = pg.image.load("zasoby/spritey/energia.png").convert_alpha()
         self.ui_obraz = pg.transform.scale(self.ui_obraz, (300, 150))
-    def rysuj_interfejs(self):
+    def rysuj_interfejs(self, ekran, gracz):
         ui_x, ui_y = 0, WYSOKOSC - self.ui_obraz.get_height()
         self.ekran.blit(self.ui_obraz, (ui_x, ui_y))
         pasek_x = ui_x + 142
