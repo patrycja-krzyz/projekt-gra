@@ -8,18 +8,16 @@ class gracz():
         self.x, self.y = 700, 400
         self.szybkosc = 5
         self.energia = 100
+        self.odblokowywacz = None
         self.przedmioty_zebrane = []
-        # sciezka_do_obrazka = os.path.join("zasoby/spritey/parszywek1.png")
-        
-        # if not os.path.exists(sciezka_do_obrazka):
-            # raise FileNotFoundError(f"Nie znaleziono pliku: {sciezka_do_obrazka}")
-        
+
         self.obraz = pg.image.load("spritey/parszywek1.png").convert_alpha()
-        self.obraz = pg.transform.scale(self.obraz, (70, 90)) 
+        self.obraz = pg.transform.scale(self.obraz, (70, 90))
+        self.rect = self.obraz.get_rect(topleft=(self.x, self.y))  # ← TO JEST KLUCZOWE
 
         self.dozwolony_kolor = (219, 187, 104)
-
-
+        self.poprzednie_x = self.x
+        self.poprzednie_y = self.y
 
     def czy_moze_isc(self, x, y):
         try:
@@ -30,8 +28,9 @@ class gracz():
 
     def ruch(self):
         klawisze = pg.key.get_pressed()
-
         dx, dy = 0, 0
+        self.poprzednie_x = self.x
+        self.poprzednie_y = self.y
         
         if klawisze[pg.K_UP]:  
             dy = -self.szybkosc
@@ -57,9 +56,14 @@ class gracz():
         if self.x != nowy_x or self.y != nowy_y:
             self.energia = max(0, self.energia - 0.05)  
 
-    
+    def cofnij_ruch(self):
+        self.x = self.poprzednie_x
+        self.y = self.poprzednie_y
+        self.rect.topleft = (self.x, self.y)
+
     def aktualizuj(self):
         self.ruch()
+        self.rect.topleft = (self.x, self.y)  # ← TO TEŻ JEST WAŻNE!
 
     def rysuj(self):
         self.gra.ekran.blit(self.obraz, (self.x, self.y))

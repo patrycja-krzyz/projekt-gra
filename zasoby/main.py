@@ -5,6 +5,7 @@ from gracz import *
 from mapy import *
 from wsciekly_pies import *
 from ekrany_startowe import *
+from przeszkody import Przeszkoda
 
 class Gra: 
     def __init__(self, silnik):
@@ -83,7 +84,26 @@ class Gra:
         tort = Przedmiot(self, 850, 120, "tort.png")
         self.mapy[6].dodaj_przedmiot(tort)
 
+        autobus = Przeszkoda(self, 635, 585, "autobus.png", wymagany_przedmiot = "bilet")
+        self.mapy[5].dodaj_przeszkode(autobus)
 
+        bilet = Przedmiot(self, 370, 440, "bilet.png")
+        self.mapy[10].dodaj_przedmiot(bilet)
+
+        paniszczurek = Przeszkoda(self, 900, 600, "paniszczurek.png", wymagany_przedmiot = "roza")
+        self.mapy[1].dodaj_przeszkode(paniszczurek)
+
+        roza = Przedmiot(self, 405, 170, "roza.png")
+        self.mapy[0].dodaj_przedmiot(roza)
+
+        nauczyciel = Przeszkoda(self, 575, 465, "nauczyciel.png", wymagany_przedmiot = "dokument")
+        self.mapy[6].dodaj_przeszkode(nauczyciel)
+
+        dokument = Przedmiot(self, 345, 185, "dokument.png")
+        self.mapy[3].dodaj_przedmiot(dokument)
+
+
+     
 
         #tu można dodać więcej połączeń, przedmioty i psów
 
@@ -115,6 +135,8 @@ class Gra:
             przedmiot.rysuj()
         for pies in self.mapy[self.aktualna_mapa].psy:
             pies.rysuj()
+        for przeszkoda in self.mapy[self.aktualna_mapa].przeszkody:
+            przeszkoda.rysuj(self.ekran)
         self.gracz.rysuj()
         self.silnik.rysuj_interfejs(self.ekran, self.gracz) ##self.rysuj_interfejs() wczesniej                 
         pg.display.flip() 
@@ -124,6 +146,13 @@ class Gra:
         for pies in self.mapy[self.aktualna_mapa].psy:
             pies.aktualizuj()
         self.mapy[self.aktualna_mapa].sprawdz_krawedzie()
+        for przeszkoda in self.mapy[self.aktualna_mapa].przeszkody:
+            if przeszkoda.koliduje(self.gracz):
+                if self.gracz.odblokowywacz == przeszkoda.wymagany_przedmiot:
+                    przeszkoda.aktywna = False
+                    self.gracz.odblokowywacz = None
+                else:
+                    self.gracz.cofnij_ruch()
         self.rysuj()
         self.zegar.tick(FPS) 
 

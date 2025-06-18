@@ -1,6 +1,7 @@
 import pygame as pg
 from przedmioty import *
 from ustawienia import *
+from przeszkody import Przeszkoda
 
 
 marg = 20 #margines uzywany pozniej przy krawedziach mapy zeby parszywek nie wyszedl caly za okienko
@@ -12,6 +13,7 @@ class Mapa:
         self.polaczenia = {}
         self.przedmioty = []
         self.psy = []
+        self.przeszkody = []
     
     def dodaj_polaczenie(self, kierunek, indeks_mapy_docelowej):
         self.polaczenia[kierunek] = indeks_mapy_docelowej
@@ -21,6 +23,9 @@ class Mapa:
 
     def dodaj_przedmiot( self, Przedmiot):
         self.przedmioty.append(Przedmiot)
+    
+    def dodaj_przeszkode(self, przeszkoda):
+        self.przeszkody.append(przeszkoda)
     
     def sprawdz_krawedzie(self):
         gracz = self.gra.gracz

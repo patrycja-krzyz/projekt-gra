@@ -78,4 +78,10 @@ class Silnik:
             
             self.ekran.blit(miniatura, (x, y))
 
+        
+    
+    
+
+    
+
             

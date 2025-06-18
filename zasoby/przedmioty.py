@@ -7,6 +7,7 @@ class Przedmiot:
         self.gra = gra
         self.x = x
         self.y = y
+        self.nazwa = nazwa_pliku.split('.')[0]
         sciezka_do_obrazka = os.path.join("spritey", nazwa_pliku)
         
         if not os.path.exists(sciezka_do_obrazka):
@@ -26,8 +27,14 @@ class Przedmiot:
         gracz_rect = pg.Rect(self.gra.gracz.x, self.gra.gracz.y, 50, 50)  
         return self.rect.colliderect(gracz_rect)
 
+    
     def podnies(self):
         self.podniesiony = True
-        self.gra.gracz.przedmioty_zebrane.append(self.obraz)
-        self.gra.gracz.energia = min(100, self.gra.gracz.energia + 10)
+        if self.nazwa in ["bilet", "roza", "dokument"]:
+            self.gra.gracz.odblokowywacz = self.nazwa
+            print(f"Gracz trzyma: {self.nazwa}")
+        else:
+            self.gra.gracz.przedmioty_zebrane.append(self.obraz)
+            self.gra.gracz.energia = min(100, self.gra.gracz.energia + 10)
+
        
