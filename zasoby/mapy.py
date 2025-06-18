@@ -15,12 +15,12 @@ class Mapa:
     
     def dodaj_polaczenie(self, kierunek, indeks_mapy_docelowej):
         self.polaczenia[kierunek] = indeks_mapy_docelowej
-
-    def dodaj_przedmiot(self, przedmiot):
-        self.przedmioty.append(przedmiot)
         
     def dodaj_psa(self, pies):
         self.psy.append(pies)
+
+    def dodaj_przedmiot( self, Przedmiot):
+        self.przedmioty.append(Przedmiot)
     
     def sprawdz_krawedzie(self):
         gracz = self.gra.gracz

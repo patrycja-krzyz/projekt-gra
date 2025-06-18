@@ -13,7 +13,7 @@ class Przedmiot:
             raise FileNotFoundError(f"Nie znaleziono pliku: {sciezka_do_obrazka}")
         
         self.obraz = pg.image.load(sciezka_do_obrazka).convert_alpha()
-        self.obraz = pg.transform.scale(self.obraz, (40, 40))  
+        self.obraz = pg.transform.scale(self.obraz, (70, 70))  
         
         self.rect = self.obraz.get_rect(topleft=(self.x, self.y))
         self.podniesiony = False  

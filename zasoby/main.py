@@ -65,6 +65,26 @@ class Gra:
         pies_dworzec = WscieklyPies(self, 445, 350, sciezka_dworzec, predkosc=1.5)  # Wolniejszy
         self.mapy[1].dodaj_psa(pies_dworzec)
 
+        self.przedmioty = [
+        ]
+
+        hulajnoga = Przedmiot(self, 685, 685, "hulajnoga.png")
+        self.mapy[10].dodaj_przedmiot(hulajnoga)
+
+        ser = Przedmiot( self, 260, 380, "ser.png")
+        self.mapy[1].dodaj_przedmiot(ser)
+
+        ksiazka = Przedmiot(self, 460, 300, "ksiazka.png")
+        self.mapy[5].dodaj_przedmiot(ksiazka)
+
+        puzzle = Przedmiot(self, 330, 120, "puzzle.png")
+        self.mapy[6].dodaj_przedmiot(puzzle)
+
+        tort = Przedmiot(self, 850, 120, "tort.png")
+        self.mapy[6].dodaj_przedmiot(tort)
+
+
+
         #tu można dodać więcej połączeń, przedmioty i psów
 
     
@@ -75,7 +95,7 @@ class Gra:
                 sys.exit()
             elif zdarz.type == pg.KEYDOWN:
                 if zdarz.key == pg.K_e:
-                    for przedmiot in self.przedmioty:
+                    for przedmiot in self.mapy[self.aktualna_mapa].przedmioty:
                         if przedmiot.sprawdz_kolizje_z_graczem() and not przedmiot.podniesiony:
                             przedmiot.podnies()
                             print("Przedmiot podniesiony!")
@@ -91,8 +111,8 @@ class Gra:
     
     def rysuj(self):
         self.ekran.blit(self.tlo, (0, 0)) 
-        #for przedmiot in self.przedmioty:
-        #   przedmiot.rysuj()
+        for przedmiot in self.mapy[self.aktualna_mapa].przedmioty:
+            przedmiot.rysuj()
         for pies in self.mapy[self.aktualna_mapa].psy:
             pies.rysuj()
         self.gracz.rysuj()
@@ -101,10 +121,10 @@ class Gra:
 
     def aktualizuj(self):
         self.gracz.aktualizuj()
-        self.rysuj()
         for pies in self.mapy[self.aktualna_mapa].psy:
             pies.aktualizuj()
         self.mapy[self.aktualna_mapa].sprawdz_krawedzie()
+        self.rysuj()
         self.zegar.tick(FPS) 
 
     def graj(self):

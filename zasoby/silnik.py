@@ -63,9 +63,19 @@ class Silnik:
         pg.draw.rect(self.ekran, (50, 50, 50), (pasek_x, pasek_y, maks_szerokosc, wysokosc_paska))
         pg.draw.rect(self.ekran, kolor_paska, (pasek_x, pasek_y, aktualna_szerokosc, wysokosc_paska))
 
-        start_x = ui_x + 180
-        start_y = ui_y + 90
+        start_x = ui_x + 160
+        start_y = ui_y + 100
         for i, obraz in enumerate(self.gracz.przedmioty_zebrane):
             miniatura = pg.transform.scale(obraz, (30, 30))
-            self.ekran.blit(miniatura, (start_x + i * 35, start_y))
 
+            if i < 3:
+                x = start_x + i * 35
+                y = start_y
+
+            else:
+                x = start_x + (i - 3) * 35
+                y = start_y - 35  #górny rząd
+            
+            self.ekran.blit(miniatura, (x, y))
+
+            
