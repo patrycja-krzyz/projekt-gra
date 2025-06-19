@@ -1,6 +1,10 @@
 import pygame as pg
 from ustawienia import *
 from gracz import *
+from mapy import *
+from wsciekly_pies import *
+from przedmioty import *
+from przeszkody import *
 
 import pygame as pg
 
@@ -11,6 +15,11 @@ class Silnik:
         self.wczytaj_ui()
         self.gracz = gracz(self)
 
+    def daj_gre_mapom(self, gra):
+        self.gra = gra
+        for mapa in self.mapy:
+            mapa.gra = gra
+    
     def wczytaj_teksty(self):
         self.mapki = [
             pg.transform.scale(pg.image.load("tekstury/staremiasto.png").convert(), RES),
@@ -39,6 +48,89 @@ class Silnik:
         #   pg.transform.scale(pg.image.load("zasoby/tekstury/zoo.png").convert(), RES),
         #   pg.transform.scale(pg.image.load("zasoby/tekstury/niepolda.png").convert(), RES)
         #]
+
+        self.mapy = [Mapa(i, mapa, self) for i, mapa in enumerate(self.mapki)]
+
+
+        self.mapy[0].dodaj_polaczenie("gora", 5)
+        self.mapy[0].dodaj_polaczenie("dol", 1)
+        self.mapy[1].dodaj_polaczenie("dol", 3)
+        self.mapy[3].dodaj_polaczenie("gora", 1)
+        self.mapy[1].dodaj_polaczenie("gora", 0)
+        self.mapy[5].dodaj_polaczenie("dol", 0)
+        self.mapy[0].dodaj_polaczenie("prawo", 6)
+        self.mapy[6].dodaj_polaczenie("lewo", 0)
+        self.mapy[6].dodaj_polaczenie("gora", 9)
+        self.mapy[9].dodaj_polaczenie("dol", 6)
+        self.mapy[0].dodaj_polaczenie("lewo", 10)
+        self.mapy[10].dodaj_polaczenie("prawo", 0)
+        sciezka_ruch_niepolda = [
+            (375, 420),  
+            (950, 420), 
+            (375, 420)   
+        ]
+
+        pies_niepolda = WscieklyPies(self, 375, 420, sciezka_ruch_niepolda)
+        self.mapy[10].dodaj_psa(pies_niepolda)
+        
+        sciezka_grunwald = [
+            (290, 230),  
+            (840, 230),  
+            (290, 230)   
+        ]
+        pies_grunwald = WscieklyPies(self, 290, 230, sciezka_grunwald, predkosc=2)
+        self.mapy[6].dodaj_psa(pies_grunwald)
+        
+        sciezka_dworzec = [
+            (445, 350),  
+            (920, 350),  
+            (920, 660),
+            (920, 350),
+            (445, 350)   
+        ]
+        pies_dworzec = WscieklyPies(self, 445, 350, sciezka_dworzec, predkosc=1.5)  # Wolniejszy
+        self.mapy[1].dodaj_psa(pies_dworzec)
+
+        self.przedmioty = [
+        ]
+
+        hulajnoga = Przedmiot(self, 685, 685, "hulajnoga.png")
+        self.mapy[10].dodaj_przedmiot(hulajnoga)
+
+        ser = Przedmiot( self, 260, 380, "ser.png")
+        self.mapy[1].dodaj_przedmiot(ser)
+
+        ksiazka = Przedmiot(self, 460, 300, "ksiazka.png")
+        self.mapy[5].dodaj_przedmiot(ksiazka)
+
+        puzzle = Przedmiot(self, 330, 120, "puzzle.png")
+        self.mapy[6].dodaj_przedmiot(puzzle)
+
+        tort = Przedmiot(self, 850, 120, "tort.png")
+        self.mapy[6].dodaj_przedmiot(tort)
+
+        autobus = Przeszkoda(self, 635, 585, "autobus.png", wymagany_przedmiot = "bilet")
+        self.mapy[5].dodaj_przeszkode(autobus)
+
+        bilet = Przedmiot(self, 370, 440, "bilet.png")
+        self.mapy[10].dodaj_przedmiot(bilet)
+
+        paniszczurek = Przeszkoda(self, 900, 600, "paniszczurek.png", wymagany_przedmiot = "roza")
+        self.mapy[1].dodaj_przeszkode(paniszczurek)
+
+        roza = Przedmiot(self, 405, 170, "roza.png")
+        self.mapy[0].dodaj_przedmiot(roza)
+
+        nauczyciel = Przeszkoda(self, 575, 465, "nauczyciel.png", wymagany_przedmiot = "dokument")
+        self.mapy[6].dodaj_przeszkode(nauczyciel)
+
+        dokument = Przedmiot(self, 345, 185, "dokument.png")
+        self.mapy[3].dodaj_przedmiot(dokument)
+
+
+     
+
+        #tu można dodać więcej połączeń, przedmioty i psów
         
     def wczytaj_ui(self):
         self.ui_obraz = pg.image.load("spritey/energia.png").convert_alpha()
