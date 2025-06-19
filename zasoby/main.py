@@ -24,7 +24,7 @@ class Gra:
         self.ui_obraz = self.silnik.ui_obraz
         self.aktualna_mapa = 0
         self.mapy = self.silnik.mapy
-
+        self.tlo = self.mapy[self.aktualna_mapa].tekstura
 
     
     def sprawdz_zdarzenia(self):
