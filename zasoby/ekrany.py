@@ -98,3 +98,31 @@ class mapa_wro():
     def rysuj(self):
         self.gra.ekran.blit(self.tlo, (0, 0))
         pg.display.flip()
+
+
+class ekran_gameover():
+    
+    def __init__(self, gra):
+        self.gra = gra 
+        self.tlo = pg.transform.scale(pg.image.load("tekstury/gameover.png").convert(), RES)
+        # self.tlo = pg.transform.scale(pg.image.load("zasoby/tekstury/gameover.png").convert(), RES)
+        self.start_znowu_rect = pg.Rect(1000, 630, 120, 120)
+
+    def sprawdz_zdarzenia(self):
+        mysz_pos = pg.mouse.get_pos()
+        
+        for zdarz in pg.event.get(): 
+            if zdarz.type == pg.QUIT:
+                pg.quit()
+                exit()
+            if zdarz.type == pg.MOUSEBUTTONDOWN and zdarz.button == 1: 
+                if self.start_znowu_rect.collidepoint(mysz_pos):
+                    self.gra.resetuj()
+
+        return None
+    
+    def rysuj(self):
+        self.gra.ekran.blit(self.tlo, (0, 0))
+        pg.draw.rect(self.gra.ekran, (255, 0, 0), self.start_znowu_rect, 3)
+        pg.display.flip()
+        

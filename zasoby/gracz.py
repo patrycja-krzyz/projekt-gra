@@ -64,6 +64,20 @@ class gracz():
     def aktualizuj(self):
         self.ruch()
         self.rect.topleft = (self.x, self.y)  # ← TO TEŻ JEST WAŻNE!
+        self.czy_przegrana()
 
     def rysuj(self):
         self.gra.ekran.blit(self.obraz, (self.x, self.y))
+
+    def czy_przegrana(self):
+        if self.energia == 0:
+            self.gra.stan_gry = "gameover"
+
+    def resetuj(self):
+        self.x = 700
+        self.y = 400
+        self.energia = 100
+        self.odblokowywacz = None
+        self.obraz = pg.image.load("spritey/parszywek1.png").convert_alpha()
+        self.obraz = pg.transform.scale(self.obraz, (70, 90))
+        

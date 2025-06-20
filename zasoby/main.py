@@ -4,7 +4,7 @@ from przedmioty import *
 from gracz import *
 from mapy import *
 from wsciekly_pies import *
-from ekrany_startowe import *
+from ekrany import *
 from przeszkody import Przeszkoda
 
 class Gra: 
@@ -16,11 +16,12 @@ class Gra:
         pg.display.set_caption("Parszywek we Wrocławiu")
         self.zegar = pg.time.Clock()
         self.delta_czas = 1
+        self.gracz = self.silnik.gracz
         self.ekran_startowy = ekran_startowy(self)
         self.ekran_jakgrac = ekran_jakgrac(self)
+        self.ekran_gameover = ekran_gameover(self)
         self.mapa_wro = mapa_wro(self) 
         self.stan_gry = "start"
-        self.gracz = self.silnik.gracz
         self.ui_obraz = self.silnik.ui_obraz
         self.aktualna_mapa = 0
         self.mapy = self.silnik.mapy
@@ -75,6 +76,14 @@ class Gra:
         self.rysuj()
         self.zegar.tick(FPS) 
 
+    def resetuj(self):
+        self.stan_gry = "start"
+        self.aktualna_mapa = 0
+        self.tlo = self.mapy[self.aktualna_mapa].tekstura
+        self.gracz.resetuj()
+        for mapa in self.mapy:
+            mapa.resetuj()
+        
     def graj(self):
         while True:
             if self.stan_gry == "start":
@@ -86,6 +95,9 @@ class Gra:
             if self.stan_gry == "mapa":
                 self.mapa_wro.rysuj()
                 self.mapa_wro.sprawdz_zdarzenia() 
+            if self.stan_gry == "gameover":
+                self.ekran_gameover.rysuj()
+                self.ekran_gameover.sprawdz_zdarzenia() 
             if self.stan_gry == "gra":
                 self.sprawdz_zdarzenia()
                 self.aktualizuj()
@@ -93,7 +105,7 @@ class Gra:
 if __name__ == "__main__":
     silnik = Silnik()
     gra = Gra(silnik)
-    silnik.daj_gre_mapom(gra)
+    silnik.daj_gre_mapom_i_graczowi(gra)
     gra.graj()
 
     

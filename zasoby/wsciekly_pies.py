@@ -5,12 +5,14 @@ import os
 class WscieklyPies:
     def __init__(self, gra, x, y, sciezka_ruch, predkosc=3):
         self.gra = gra
+        self.startowe_x = x
+        self.startowy_y = y
         self.x, self.y = x, y
         self.sciezka_ruch = sciezka_ruch
         self.aktualny_cel = 0
         self.predkosc = predkosc
         self.kierunek = 1 
-        self.obrazenia = 5  
+        self.obrazenia = 5 
         self.aktywny_atak = False
         self.czas_ostatniego_ataku = 0
         self.cooldown_ataku = 1000  
@@ -89,3 +91,9 @@ class WscieklyPies:
     
     def rysuj(self):
         self.gra.ekran.blit(self.obraz, (self.x, self.y))
+
+    def resetuj(self):
+        self.x = self.startowe_x
+        self.y = self.startowy_y
+        self.calkowite_obrazenia = 0
+

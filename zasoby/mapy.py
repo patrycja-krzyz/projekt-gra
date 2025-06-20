@@ -53,4 +53,13 @@ class Mapa:
             gracz.y = WYSOKOSC - marg - 90
         elif kierunek == "dol":
             gracz.y = marg
+
+    def resetuj(self):
+        for przedmiot in self.przedmioty:
+            przedmiot.podniesiony = False
+        for pies in self.psy:
+            pies.resetuj()
+        for przeszkoda in self.przeszkody:
+            przeszkoda.aktywna = True
+
         

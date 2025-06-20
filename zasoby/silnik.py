@@ -15,8 +15,9 @@ class Silnik:
         self.wczytaj_ui()
         self.gracz = gracz(self)
 
-    def daj_gre_mapom(self, gra):
+    def daj_gre_mapom_i_graczowi(self, gra):
         self.gra = gra
+        self.gracz.gra = gra
         for mapa in self.mapy:
             mapa.gra = gra
     
