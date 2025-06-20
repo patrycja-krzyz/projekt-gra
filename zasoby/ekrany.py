@@ -123,6 +123,5 @@ class ekran_gameover():
     
     def rysuj(self):
         self.gra.ekran.blit(self.tlo, (0, 0))
-        pg.draw.rect(self.gra.ekran, (255, 0, 0), self.start_znowu_rect, 3)
         pg.display.flip()
         

@@ -35,6 +35,7 @@ class Przedmiot:
             print(f"Gracz trzyma: {self.nazwa}")
         else:
             self.gra.gracz.przedmioty_zebrane.append(self.obraz)
-            self.gra.gracz.energia = min(100, self.gra.gracz.energia + 10)
+            self.gra.gracz.energia = min(100, self.gra.gracz.energia + 20) 
+            
 
        

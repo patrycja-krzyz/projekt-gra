@@ -50,11 +50,12 @@ class gracz():
         srodek_x = nowy_x + self.obraz.get_width() // 2
         dol_y = nowy_y + self.obraz.get_height()
 
+        if self.x != nowy_x or self.y != nowy_y:
+            self.energia = max(0, self.energia - 0.05)  
+        
         if self.czy_moze_isc(srodek_x, dol_y):
             self.x, self.y = nowy_x, nowy_y
 
-        if self.x != nowy_x or self.y != nowy_y:
-            self.energia = max(0, self.energia - 0.05)  
 
     def cofnij_ruch(self):
         self.x = self.poprzednie_x
