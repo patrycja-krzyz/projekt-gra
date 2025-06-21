@@ -13,7 +13,7 @@ class gracz():
 
         self.obraz = pg.image.load("spritey/parszywek1.png").convert_alpha()
         self.obraz = pg.transform.scale(self.obraz, (70, 90))
-        self.rect = self.obraz.get_rect(topleft=(self.x, self.y))  # ← TO JEST KLUCZOWE
+        self.rect = self.obraz.get_rect(topleft=(self.x, self.y))
 
         self.dozwolony_kolor = (219, 187, 104)
         self.poprzednie_x = self.x
@@ -51,7 +51,7 @@ class gracz():
         dol_y = nowy_y + self.obraz.get_height()
 
         if self.x != nowy_x or self.y != nowy_y:
-            self.energia = max(0, self.energia - 0.05)  
+            self.energia = max(0, self.energia - 0.05)  #sprawdzcie czy nie spada za szybko
         
         if self.czy_moze_isc(srodek_x, dol_y):
             self.x, self.y = nowy_x, nowy_y
@@ -64,7 +64,7 @@ class gracz():
 
     def aktualizuj(self):
         self.ruch()
-        self.rect.topleft = (self.x, self.y)  # ← TO TEŻ JEST WAŻNE!
+        self.rect.topleft = (self.x, self.y)
         self.czy_przegrana()
 
     def rysuj(self):

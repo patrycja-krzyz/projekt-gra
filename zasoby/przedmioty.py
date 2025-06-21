@@ -29,13 +29,16 @@ class Przedmiot:
 
     
     def podnies(self):
-        self.podniesiony = True
-        if self.nazwa in ["bilet", "roza", "dokument"]:
+        if self.nazwa in ["bilet", "roza", "dokument"] and self.gra.gracz.odblokowywacz == None:
             self.gra.gracz.odblokowywacz = self.nazwa
             print(f"Gracz trzyma: {self.nazwa}")
-        else:
+            self.podniesiony = True
+        elif self.nazwa in ["hulajnoga", "ser", "ksiazka", "puzzle", "tort"]:
             self.gra.gracz.przedmioty_zebrane.append(self.obraz)
             self.gra.gracz.energia = min(100, self.gra.gracz.energia + 20) 
+            self.podniesiony = True
+        else:
+            None 
             
 
        

@@ -116,17 +116,22 @@ class Silnik:
         bilet = Przedmiot(self, 370, 440, "bilet.png")
         self.mapy[10].dodaj_przedmiot(bilet)
 
-        paniszczurek = Przeszkoda(self, 900, 600, "paniszczurek.png", wymagany_przedmiot = "roza")
-        self.mapy[1].dodaj_przeszkode(paniszczurek)
+        # paniszczurek = Przeszkoda(self, 900, 600, "paniszczurek.png", wymagany_przedmiot = "roza")
+        # self.mapy[1].dodaj_przeszkode(paniszczurek)
 
         roza = Przedmiot(self, 405, 170, "roza.png")
         self.mapy[0].dodaj_przedmiot(roza)
 
-        nauczyciel = Przeszkoda(self, 575, 465, "nauczyciel.png", wymagany_przedmiot = "dokument")
+        nauczyciel = Przeszkoda(self, 545, 365, "nauczyciel.png", wymagany_przedmiot = "dokument")
         self.mapy[6].dodaj_przeszkode(nauczyciel)
 
         dokument = Przedmiot(self, 345, 185, "dokument.png")
         self.mapy[3].dodaj_przedmiot(dokument)
+
+        # siwek1= Przedmiot( self, 610, 280, "siwek1.png" )
+        # siwek1.obraz = pg.transform.scale(siwek1.obraz, (100, 90)) 
+        # self.mapy[9].dodaj_przedmiot(siwek1)
+        #zostawiam bo moze sie przyda ale grafika sie tu rozwala
 
 
      
@@ -158,6 +163,7 @@ class Silnik:
 
         start_x = ui_x + 160
         start_y = ui_y + 100
+        
         for i, obraz in enumerate(self.gracz.przedmioty_zebrane):
             miniatura = pg.transform.scale(obraz, (30, 30))
 
@@ -171,6 +177,15 @@ class Silnik:
             
             self.ekran.blit(miniatura, (x, y))
 
+        if gracz.odblokowywacz:
+            nazwa_pliku = f"{gracz.odblokowywacz}.png"
+            sciezka = os.path.join("spritey", nazwa_pliku)
+            if os.path.exists(sciezka):
+                obrazek = pg.image.load(sciezka).convert_alpha()
+                obrazek = pg.transform.scale(obrazek, (40, 40))
+                fiolet_x = ui_x + 40  
+                fiolet_y = ui_y + 85
+                self.ekran.blit(obrazek, (fiolet_x, fiolet_y))
         
     
     
