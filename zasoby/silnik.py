@@ -71,7 +71,7 @@ class Silnik:
             (505, 420)   
         ]
 
-        pies_niepolda = WscieklyPies(self, 375, 420, sciezka_ruch_niepolda, predkosc=1.5)
+        pies_niepolda = WscieklyPies(self, 505, 420, sciezka_ruch_niepolda, predkosc=1.5)
         self.mapy[10].dodaj_psa(pies_niepolda)
         
         sciezka_grunwald = [
@@ -85,7 +85,7 @@ class Silnik:
         sciezka_dworzec = [
             (445, 350),  
             (920, 350),  
-            (945, 660),
+            (920, 550),
             (920, 350),
             (445, 350)   
         ]
