@@ -34,7 +34,7 @@ class Gra:
                 pg.quit()
                 sys.exit()
             elif zdarz.type == pg.KEYDOWN:
-                if zdarz.key == pg.K_e:
+                if zdarz.key == pg.K_SPACE:
                     for przedmiot in self.mapy[self.aktualna_mapa].przedmioty:
                         if przedmiot.sprawdz_kolizje_z_graczem() and not przedmiot.podniesiony:
                             przedmiot.podnies()
