@@ -66,12 +66,12 @@ class Silnik:
         self.mapy[0].dodaj_polaczenie("lewo", 10)
         self.mapy[10].dodaj_polaczenie("prawo", 0)
         sciezka_ruch_niepolda = [
-            (375, 420),  
+            (505, 420),  
             (950, 420), 
-            (375, 420)   
+            (505, 420)   
         ]
 
-        pies_niepolda = WscieklyPies(self, 375, 420, sciezka_ruch_niepolda)
+        pies_niepolda = WscieklyPies(self, 375, 420, sciezka_ruch_niepolda, predkosc=1.5)
         self.mapy[10].dodaj_psa(pies_niepolda)
         
         sciezka_grunwald = [
@@ -79,13 +79,13 @@ class Silnik:
             (840, 230),  
             (290, 230)   
         ]
-        pies_grunwald = WscieklyPies(self, 290, 230, sciezka_grunwald, predkosc=2)
+        pies_grunwald = WscieklyPies(self, 290, 230, sciezka_grunwald, predkosc=1.5)
         self.mapy[6].dodaj_psa(pies_grunwald)
         
         sciezka_dworzec = [
             (445, 350),  
             (920, 350),  
-            (920, 660),
+            (945, 660),
             (920, 350),
             (445, 350)   
         ]
