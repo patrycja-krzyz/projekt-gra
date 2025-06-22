@@ -110,20 +110,61 @@ class Silnik:
         tort = Przedmiot(self, 850, 120, "tort.png")
         self.mapy[6].dodaj_przedmiot(tort)
 
-        autobus = Przeszkoda(self, 670, 585, "autobus.png", wymagany_przedmiot = "bilet")
+        chmurka_bilet_img = pg.image.load("spritey/chmurka_bilet.png").convert_alpha()
+        chmurka_bilet_img = pg.transform.scale(chmurka_bilet_img, (250, 250))
+
+        chmurka_bilet = Przeszkoda(self, 420, 390, "chmurka_bilet.png")
+        chmurka_bilet.obraz = chmurka_bilet_img 
+
+        autobus = Przeszkoda(
+            self,
+            670, 585,
+            "autobus.png",
+            wymagany_przedmiot="bilet",
+            kontrolowana_przeszkoda=chmurka_bilet  
+        )
+
         self.mapy[5].dodaj_przeszkode(autobus)
+        self.mapy[5].dodaj_przeszkode(chmurka_bilet)
 
         bilet = Przedmiot(self, 370, 445, "bilet.png")
         self.mapy[10].dodaj_przedmiot(bilet)
 
-        paniszczurek = Przeszkoda(self, 940, 600, "paniszczurek.png", wymagany_przedmiot = "roza")
-        self.mapy[1].dodaj_przeszkode(paniszczurek)
+        chmurka_dokument_img = pg.image.load("spritey/chmurka_dokument.png").convert_alpha()
+        chmurka_dokument_img = pg.transform.scale(chmurka_dokument_img, (250, 250))
+        chmurka_dokument = Przeszkoda(self, 310, 185, "chmurka_dokument.png")
+        chmurka_dokument.obraz = chmurka_dokument_img
 
+        nauczyciel = Przeszkoda(
+            self, 570, 365, "nauczyciel.png",
+            wymagany_przedmiot="dokument",
+            kontrolowana_przeszkoda=chmurka_dokument
+        )
+
+   
+        chmurka_roza_img = pg.image.load("spritey/chmurka_roza.png").convert_alpha()
+        chmurka_roza_img = pg.transform.scale(chmurka_roza_img, (250, 250))
+        chmurka_roza = Przeszkoda(self, 685, 420, "chmurka_roza.png")
+        chmurka_roza.obraz = chmurka_roza_img
+
+        paniszczurek = Przeszkoda(
+            self, 940, 600, "paniszczurek.png",
+            wymagany_przedmiot="roza",
+            kontrolowana_przeszkoda=chmurka_roza
+        )
+
+   
+        self.mapy[5].dodaj_przeszkode(autobus)       
+        self.mapy[5].dodaj_przeszkode(chmurka_bilet)
+    
+        self.mapy[6].dodaj_przeszkode(nauczyciel)    
+        self.mapy[6].dodaj_przeszkode(chmurka_dokument)
+    
+        self.mapy[1].dodaj_przeszkode(paniszczurek)  
+        self.mapy[1].dodaj_przeszkode(chmurka_roza)
+        
         roza = Przedmiot(self, 405, 180, "roza.png")
         self.mapy[0].dodaj_przedmiot(roza)
-
-        nauczyciel = Przeszkoda(self, 570, 365, "nauczyciel.png", wymagany_przedmiot = "dokument")
-        self.mapy[6].dodaj_przeszkode(nauczyciel)
 
         dokument = Przedmiot(self, 350, 185, "dokument.png")
         self.mapy[3].dodaj_przedmiot(dokument)
