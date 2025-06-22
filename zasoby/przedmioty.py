@@ -35,7 +35,7 @@ class Przedmiot:
             self.podniesiony = True
         elif self.nazwa in ["hulajnoga", "ser", "ksiazka", "puzzle", "tort"]:
             self.gra.gracz.przedmioty_zebrane.append(self.obraz)
-            self.gra.gracz.energia = min(100, self.gra.gracz.energia + 20) 
+            self.gra.gracz.energia = min(100, self.gra.gracz.energia + 30) 
             self.podniesiony = True
         else:
             None 

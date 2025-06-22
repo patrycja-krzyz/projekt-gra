@@ -110,22 +110,22 @@ class Silnik:
         tort = Przedmiot(self, 850, 120, "tort.png")
         self.mapy[6].dodaj_przedmiot(tort)
 
-        autobus = Przeszkoda(self, 635, 585, "autobus.png", wymagany_przedmiot = "bilet")
+        autobus = Przeszkoda(self, 670, 585, "autobus.png", wymagany_przedmiot = "bilet")
         self.mapy[5].dodaj_przeszkode(autobus)
 
-        bilet = Przedmiot(self, 370, 440, "bilet.png")
+        bilet = Przedmiot(self, 370, 445, "bilet.png")
         self.mapy[10].dodaj_przedmiot(bilet)
 
-        # paniszczurek = Przeszkoda(self, 900, 600, "paniszczurek.png", wymagany_przedmiot = "roza")
-        # self.mapy[1].dodaj_przeszkode(paniszczurek)
+        paniszczurek = Przeszkoda(self, 940, 600, "paniszczurek.png", wymagany_przedmiot = "roza")
+        self.mapy[1].dodaj_przeszkode(paniszczurek)
 
-        roza = Przedmiot(self, 405, 170, "roza.png")
+        roza = Przedmiot(self, 405, 180, "roza.png")
         self.mapy[0].dodaj_przedmiot(roza)
 
-        nauczyciel = Przeszkoda(self, 545, 365, "nauczyciel.png", wymagany_przedmiot = "dokument")
+        nauczyciel = Przeszkoda(self, 570, 365, "nauczyciel.png", wymagany_przedmiot = "dokument")
         self.mapy[6].dodaj_przeszkode(nauczyciel)
 
-        dokument = Przedmiot(self, 345, 185, "dokument.png")
+        dokument = Przedmiot(self, 350, 185, "dokument.png")
         self.mapy[3].dodaj_przedmiot(dokument)
 
         # siwek1= Przedmiot( self, 610, 280, "siwek1.png" )
