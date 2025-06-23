@@ -48,7 +48,7 @@ class ekran_startowy():
         self.gra.ekran.blit(self.przycisk_startu, self.start_rect)
         self.gra.ekran.blit(self.przycisk_jakgrac, self.jakgrac_rect)
         teraz = pg.time.get_ticks()
-        if teraz - self.zegar > 300:  #dwie sekundy
+        if teraz - self.zegar > 300:
             self.nr_parszywka = (self.nr_parszywka + 1) % 3
             self.zegar = teraz
         self.gra.ekran.blit(self.parszywki[self.nr_parszywka], (760, 280))
@@ -131,6 +131,14 @@ class ekran_wygrana():
         self.gra = gra
         self.tlo = pg.transform.scale(pg.image.load("tekstury/welldone.png").convert(), RES)
         self.przycisk_restartu_rect = pg.Rect(1000, 630, 120, 120)  
+        self.siwek1 = pg.image.load("spritey/siwek1.png").convert_alpha()   
+        self.siwek2 = pg.image.load("spritey/siwek2.png").convert_alpha()      
+        self.siwki = [
+            pg.transform.scale(self.siwek1, (150, 150)),
+            pg.transform.scale(self.siwek2, (170, 170)),
+        ]
+        self.nr_siwka = 0
+        self.zegar = pg.time.get_ticks()
 
     def sprawdz_zdarzenia(self):
         mysz_pos = pg.mouse.get_pos()
@@ -147,4 +155,12 @@ class ekran_wygrana():
 
     def rysuj(self):
         self.gra.ekran.blit(self.tlo, (0, 0))
+        teraz = pg.time.get_ticks()
+        if teraz - self.zegar > 300:
+            self.nr_siwka = (self.nr_siwka + 1) % 2
+            self.zegar = teraz
+        if self.nr_siwka == 0:
+            self.gra.ekran.blit(self.siwki[0], (500, 320))
+        elif self.nr_siwka == 1:
+            self.gra.ekran.blit(self.siwki[1], (500, 300))
         pg.display.flip()
