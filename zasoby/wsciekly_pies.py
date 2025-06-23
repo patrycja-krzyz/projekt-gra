@@ -19,7 +19,7 @@ class WscieklyPies:
         self.czas_czerwonego = 0
         self.czerwony_aktywny = False
         
-        sciezka_do_obrazka = os.path.join("spritey", "wscieklypies.png")
+        sciezka_do_obrazka = os.path.join("zasoby", "spritey", "wscieklypies.png")
         if not os.path.exists(sciezka_do_obrazka):
             raise FileNotFoundError(f"Nie znaleziono pliku: {sciezka_do_obrazka}")
         

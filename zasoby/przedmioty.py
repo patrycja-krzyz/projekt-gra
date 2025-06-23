@@ -9,7 +9,7 @@ class Przedmiot:
         self.y = y
         self.nazwa = nazwa_pliku.split('.')[0]
         sciezka_do_obrazka = os.path.join("spritey", nazwa_pliku)
-        
+
         if not os.path.exists(sciezka_do_obrazka):
             raise FileNotFoundError(f"Nie znaleziono pliku: {sciezka_do_obrazka}")
         
@@ -37,6 +37,9 @@ class Przedmiot:
             self.gra.gracz.przedmioty_zebrane.append(self.obraz)
             self.gra.gracz.energia = min(100, self.gra.gracz.energia + 30) 
             self.podniesiony = True
+            if not hasattr(self.gra.gracz, 'zebrane_nazwy'):  #jeśli zbiór nie istnieje to go inicjalizujemy
+                self.gra.gracz.zebrane_nazwy = set()
+            self.gra.gracz.zebrane_nazwy.append(self.nazwa)
         else:
             None 
             

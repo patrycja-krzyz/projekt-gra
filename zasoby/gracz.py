@@ -10,6 +10,7 @@ class gracz():
         self.energia = 100
         self.odblokowywacz = None
         self.przedmioty_zebrane = []
+        self.zebrane_nazwy = []
 
         self.obraz = pg.image.load("spritey/parszywek1.png").convert_alpha()
         self.obraz = pg.transform.scale(self.obraz, (70, 90))
@@ -18,6 +19,7 @@ class gracz():
         self.dozwolony_kolor = (219, 187, 104)
         self.poprzednie_x = self.x
         self.poprzednie_y = self.y
+
 
     def czy_moze_isc(self, x, y):
         try:
@@ -51,7 +53,7 @@ class gracz():
         dol_y = nowy_y + self.obraz.get_height()
 
         if self.x != nowy_x or self.y != nowy_y:
-            self.energia = max(0, self.energia - 0.05)  #sprawdzcie czy nie spada za szybko
+            self.energia = max(0, self.energia - 0.025)  
         
         if self.czy_moze_isc(srodek_x, dol_y):
             self.x, self.y = nowy_x, nowy_y
@@ -81,4 +83,4 @@ class gracz():
         self.odblokowywacz = None
         self.obraz = pg.image.load("spritey/parszywek1.png").convert_alpha()
         self.obraz = pg.transform.scale(self.obraz, (70, 90))
-        
+        self.przedmioty_zebrane = []

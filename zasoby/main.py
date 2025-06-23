@@ -26,6 +26,8 @@ class Gra:
         self.aktualna_mapa = 0
         self.mapy = self.silnik.mapy
         self.tlo = self.mapy[self.aktualna_mapa].tekstura
+        self.ekran_wygrana = ekran_wygrana(self)
+
 
     
     def sprawdz_zdarzenia(self):
@@ -73,6 +75,7 @@ class Gra:
                     self.gracz.odblokowywacz = None
                 else:
                     self.gracz.cofnij_ruch()
+        self.sprawdz_warunki_zwyciestwa() 
         self.rysuj()
         self.zegar.tick(FPS) 
 
@@ -101,7 +104,22 @@ class Gra:
             if self.stan_gry == "gra":
                 self.sprawdz_zdarzenia()
                 self.aktualizuj()
- 
+            if self.stan_gry == "wygrana":
+                self.ekran_wygrana.rysuj()
+                self.ekran_wygrana.sprawdz_zdarzenia()
+
+    def sprawdz_warunki_zwyciestwa(self):
+        wymagane = {"hulajnoga", "ser", "ksiazka", "puzzle", "tort"}  
+        zebrane = set([przedmiot for przedmiot in self.gracz.zebrane_nazwy])
+        cel_x, cel_y = 610, 280  
+        tolerancja = 50
+        gracz_x, gracz_y = self.gracz.x, self.gracz.y
+        odleglosc = ((gracz_x - cel_x)**2 + (gracz_y - cel_y)**2)**0.5
+
+        if (odleglosc <= tolerancja and wymagane == zebrane and self.aktualna_mapa == 9):
+            self.stan_gry = "wygrana"
+        
+
 if __name__ == "__main__":
     silnik = Silnik()
     gra = Gra(silnik)

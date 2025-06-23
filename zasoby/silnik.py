@@ -33,7 +33,7 @@ class Silnik:
             pg.transform.scale(pg.image.load("tekstury/pustystarter.png").convert(), RES),
             pg.transform.scale(pg.image.load("tekstury/starter.png").convert(), RES),
             pg.transform.scale(pg.image.load("tekstury/zoo.png").convert(), RES),
-            pg.transform.scale(pg.image.load("tekstury/niepolda.png").convert(), RES)
+             pg.transform.scale(pg.image.load("tekstury/niepolda.png").convert(), RES)
         ]
         
         #self.mapki = [
@@ -169,15 +169,10 @@ class Silnik:
         dokument = Przedmiot(self, 350, 185, "dokument.png")
         self.mapy[3].dodaj_przedmiot(dokument)
 
-        # siwek1= Przedmiot( self, 610, 280, "siwek1.png" )
-        # siwek1.obraz = pg.transform.scale(siwek1.obraz, (100, 90)) 
-        # self.mapy[9].dodaj_przedmiot(siwek1)
-        #zostawiam bo moze sie przyda ale grafika sie tu rozwala
+        siwek1= Przedmiot( self, 610, 280, "siwek1.png" )
+        siwek1.obraz = pg.transform.scale(siwek1.obraz, (100, 100)) 
+        self.mapy[9].dodaj_przedmiot(siwek1)
 
-
-     
-
-        #tu można dodać więcej połączeń, przedmioty i psów
         
     def wczytaj_ui(self):
         self.ui_obraz = pg.image.load("spritey/energia.png").convert_alpha()
@@ -227,6 +222,7 @@ class Silnik:
                 fiolet_x = ui_x + 40  
                 fiolet_y = ui_y + 85
                 self.ekran.blit(obrazek, (fiolet_x, fiolet_y))
+
         
     
     
