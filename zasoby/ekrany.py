@@ -1,7 +1,7 @@
 import pygame as pg 
 from ustawienia import *
 
-class ekran_startowy():
+class Ekran_startowy():
     
     def __init__(self, gra):
         self.gra = gra 
@@ -55,7 +55,7 @@ class ekran_startowy():
         pg.display.flip()
 
 
-class ekran_jakgrac:
+class Ekran_jakgrac:
     
     def __init__(self, gra):
         self.gra = gra 
@@ -82,7 +82,7 @@ class ekran_jakgrac:
         pg.display.flip()
 
 
-class mapa_wro():
+class Mapa_wro():
     def __init__(self, gra):
         self.gra = gra 
         self.tlo = pg.transform.scale(pg.image.load("tekstury/mapa.png").convert(), RES)
@@ -100,7 +100,7 @@ class mapa_wro():
         pg.display.flip()
 
 
-class ekran_gameover():
+class Ekran_gameover():
     
     def __init__(self, gra):
         self.gra = gra 
@@ -126,7 +126,7 @@ class ekran_gameover():
         pg.display.flip()
         
 
-class ekran_wygrana():
+class Ekran_wygrana():
     def __init__(self, gra):
         self.gra = gra
         self.tlo = pg.transform.scale(pg.image.load("tekstury/welldone.png").convert(), RES)

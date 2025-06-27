@@ -2,7 +2,7 @@ import pygame as pg
 from ustawienia import *
 import os
 
-class gracz():
+class Gracz():
     def __init__(self, gra):
         self.gra = gra
         self.x, self.y = 700, 400
