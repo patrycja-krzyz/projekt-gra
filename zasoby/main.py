@@ -8,7 +8,9 @@ from ekrany import *
 from przeszkody import Przeszkoda
 
 class Gra: 
-    def __init__(self, silnik):
+    """Główna klasa obsługująca przebieg gry."""
+
+    def __init__(self, silnik) -> None:
         pg.init()
         self.silnik = silnik
         self.ekran = self.silnik.ekran
@@ -17,20 +19,21 @@ class Gra:
         self.zegar = pg.time.Clock()
         self.delta_czas = 1
         self.gracz = self.silnik.gracz
-        self.ekran_startowy = ekran_startowy(self)
-        self.ekran_jakgrac = ekran_jakgrac(self)
-        self.ekran_gameover = ekran_gameover(self)
-        self.mapa_wro = mapa_wro(self) 
+        self.ekran_startowy = Ekran_startowy(self)
+        self.ekran_jakgrac = Ekran_jakgrac(self)
+        self.ekran_gameover = Ekran_gameover(self)
+        self.mapa_wro = Mapa_wro(self) 
         self.stan_gry = "start"
         self.ui_obraz = self.silnik.ui_obraz
         self.aktualna_mapa = 0
         self.mapy = self.silnik.mapy
         self.tlo = self.mapy[self.aktualna_mapa].tekstura
-        self.ekran_wygrana = ekran_wygrana(self)
+        self.ekran_wygrana = Ekran_wygrana(self)
 
 
     
-    def sprawdz_zdarzenia(self):
+    def sprawdz_zdarzenia(self) -> None:
+        """Obsłuhuje zamykanie gry, podnoszenie przedmiotów, włączanie mapy i zadawanie obrażeń przez psy."""
         for zdarz in pg.event.get():
             if zdarz.type == pg.QUIT or (zdarz.type == pg.KEYDOWN and zdarz.key == pg.K_ESCAPE):
                 pg.quit()
@@ -51,7 +54,7 @@ class Gra:
         
 
     
-    def rysuj(self):
+    def rysuj(self) -> None:
         self.ekran.blit(self.tlo, (0, 0)) 
         for przedmiot in self.mapy[self.aktualna_mapa].przedmioty:
             przedmiot.rysuj()
@@ -63,7 +66,7 @@ class Gra:
         self.silnik.rysuj_interfejs(self.ekran, self.gracz) ##self.rysuj_interfejs() wczesniej                 
         pg.display.flip() 
 
-    def aktualizuj(self):
+    def aktualizuj(self) -> None:
         self.gracz.aktualizuj()
         for pies in self.mapy[self.aktualna_mapa].psy:
             pies.aktualizuj()
@@ -79,7 +82,8 @@ class Gra:
         self.rysuj()
         self.zegar.tick(FPS) 
 
-    def resetuj(self):
+    def resetuj(self) -> None:
+        """Resetuje stan gry do początkowego, korzystając też z metod resetowania gracza i map"""
         self.stan_gry = "start"
         self.aktualna_mapa = 0
         self.tlo = self.mapy[self.aktualna_mapa].tekstura
@@ -87,30 +91,30 @@ class Gra:
         for mapa in self.mapy:
             mapa.resetuj()
         
-    def graj(self):
+    def graj(self) -> None:
         while True:
             if self.stan_gry == "start":
                 self.ekran_startowy.rysuj()
                 self.ekran_startowy.sprawdz_zdarzenia()
-            if self.stan_gry == "jakgrac":
+            elif self.stan_gry == "jakgrac":
                 self.ekran_jakgrac.rysuj()
                 self.ekran_jakgrac.sprawdz_zdarzenia()
-            if self.stan_gry == "mapa":
+            elif self.stan_gry == "mapa":
                 self.mapa_wro.rysuj()
                 self.mapa_wro.sprawdz_zdarzenia() 
-            if self.stan_gry == "gameover":
+            elif self.stan_gry == "gameover":
                 self.ekran_gameover.rysuj()
                 self.ekran_gameover.sprawdz_zdarzenia() 
-            if self.stan_gry == "gra":
+            elif self.stan_gry == "gra":
                 self.sprawdz_zdarzenia()
                 self.aktualizuj()
-            if self.stan_gry == "wygrana":
+            elif self.stan_gry == "wygrana":
                 self.ekran_wygrana.rysuj()
                 self.ekran_wygrana.sprawdz_zdarzenia()
 
-    def sprawdz_warunki_zwyciestwa(self):
-        wymagane = {"hulajnoga", "ser", "ksiazka", "puzzle", "tort"}  
-        zebrane = set([przedmiot for przedmiot in self.gracz.zebrane_nazwy])
+    def sprawdz_warunki_zwyciestwa(self) -> None:
+        wymagane: set[str] = {"hulajnoga", "ser", "ksiazka", "puzzle", "tort"}
+        zebrane: set[str] = set([przedmiot for przedmiot in self.gracz.zebrane_nazwy])
         cel_x, cel_y = 610, 280  
         tolerancja = 50
         gracz_x, gracz_y = self.gracz.x, self.gracz.y

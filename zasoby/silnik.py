@@ -9,19 +9,24 @@ from przeszkody import *
 import pygame as pg
 
 class Silnik:
-    def __init__(self):
+    """
+    Klasa silnika gry - tworzy mapy i je wypełnia (przedmiotami, przeszkodami, psami).
+    Rysuje interfejs.
+    """
+    def __init__(self) -> None:
         self.ekran = pg.display.set_mode(RES)
         ##self.wczytaj_teksty()
         self.wczytaj_ui()
-        self.gracz = gracz(self)
+        self.gracz = Gracz(self)
 
-    def daj_gre_mapom_i_graczowi(self, gra):
+    def daj_gre_mapom_i_graczowi(self, gra) -> None:
         self.gra = gra
         self.gracz.gra = gra
         for mapa in self.mapy:
             mapa.gra = gra
     
-    def wczytaj_teksty(self):
+    def wczytaj_teksty(self) -> None:
+        """Tu się dzieje tworzenie map"""
         self.mapki = [
             pg.transform.scale(pg.image.load("tekstury/staremiasto.png").convert(), RES),
             pg.transform.scale(pg.image.load("tekstury/dworzec.png").convert(), RES),
@@ -174,11 +179,11 @@ class Silnik:
         self.mapy[9].dodaj_przedmiot(siwek1)
 
         
-    def wczytaj_ui(self):
+    def wczytaj_ui(self) -> None:
         self.ui_obraz = pg.image.load("spritey/energia.png").convert_alpha()
         #self.ui_obraz = pg.image.load("zasoby/spritey/energia.png").convert_alpha()
         self.ui_obraz = pg.transform.scale(self.ui_obraz, (300, 150))
-    def rysuj_interfejs(self, ekran, gracz):
+    def rysuj_interfejs(self, ekran, gracz) -> None:
         ui_x, ui_y = 0, WYSOKOSC - self.ui_obraz.get_height()
         self.ekran.blit(self.ui_obraz, (ui_x, ui_y))
         pasek_x = ui_x + 142

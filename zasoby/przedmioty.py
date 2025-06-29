@@ -3,7 +3,10 @@ import os
 from gracz import *
 
 class Przedmiot:
-    def __init__(self, gra, x, y, nazwa_pliku):
+    """
+    Klasa reprezentująca przedmiot na mapie, który ma zostać podniesiony przez gracza, bo jest częścią prezentu (potrzebnego w całości do przejścia gry).
+    """
+    def __init__(self, gra, x: int, y: int, nazwa_pliku: str) -> None:
         self.gra = gra
         self.x = x
         self.y = y
@@ -19,16 +22,16 @@ class Przedmiot:
         self.rect = self.obraz.get_rect(topleft=(self.x, self.y))
         self.podniesiony = False  
 
-    def rysuj(self):
+    def rysuj(self) -> None:
         if not self.podniesiony:
             self.gra.ekran.blit(self.obraz, (self.x, self.y))
     
-    def sprawdz_kolizje_z_graczem(self):
+    def sprawdz_kolizje_z_graczem(self) -> bool:
         gracz_rect = pg.Rect(self.gra.gracz.x, self.gra.gracz.y, 50, 50)  
         return self.rect.colliderect(gracz_rect)
 
     
-    def podnies(self):
+    def podnies(self) -> None:
         if self.nazwa in ["bilet", "roza", "dokument"] and self.gra.gracz.odblokowywacz == None:
             self.gra.gracz.odblokowywacz = self.nazwa
             print(f"Gracz trzyma: {self.nazwa}")

@@ -3,7 +3,8 @@ from ustawienia import *
 import os
 
 class Gracz():
-    def __init__(self, gra):
+    """Reprezentuje gracza-Parszywka"""
+    def __init__(self, gra) -> None:
         self.gra = gra
         self.x, self.y = 700, 400
         self.szybkosc = 5
@@ -21,14 +22,18 @@ class Gracz():
         self.poprzednie_y = self.y
 
 
-    def czy_moze_isc(self, x, y):
+    def czy_moze_isc(self, x: float, y:float) -> bool:
+        """
+        Parszywek jest ograniczony do tunelów za pomocą ograniczenia go do jednego koloru (koloru tunelów).
+        Ta metoda sprawdza, czy to ten kolor.
+        """
         try:
             kolor = self.gra.ekran.get_at((int(x), int(y)))[:3] 
             return kolor == self.dozwolony_kolor
         except:
             return False
 
-    def ruch(self):
+    def ruch(self) -> None:
         klawisze = pg.key.get_pressed()
         dx, dy = 0, 0
         self.poprzednie_x = self.x
@@ -52,31 +57,31 @@ class Gracz():
         srodek_x = nowy_x + self.obraz.get_width() // 2
         dol_y = nowy_y + self.obraz.get_height()
 
-        if self.x != nowy_x or self.y != nowy_y:
+        if self.x != nowy_x or self.y != nowy_y:            #odejmowanie energii przy chodzeniu
             self.energia = max(0, self.energia - 0.025)  
         
-        if self.czy_moze_isc(srodek_x, dol_y):
+        if self.czy_moze_isc(srodek_x, dol_y):              #jak prawda, że nowe (przyszłe) wspł są na kolorze dozwolonym - idzie (zmieniają się wspł gracza)
             self.x, self.y = nowy_x, nowy_y
 
 
-    def cofnij_ruch(self):
+    def cofnij_ruch(self) -> None:
         self.x = self.poprzednie_x
         self.y = self.poprzednie_y
         self.rect.topleft = (self.x, self.y)
 
-    def aktualizuj(self):
+    def aktualizuj(self) -> None:
         self.ruch()
         self.rect.topleft = (self.x, self.y)
         self.czy_przegrana()
 
-    def rysuj(self):
+    def rysuj(self) -> None:
         self.gra.ekran.blit(self.obraz, (self.x, self.y))
 
-    def czy_przegrana(self):
+    def czy_przegrana(self) -> None:
         if self.energia == 0:
             self.gra.stan_gry = "gameover"
 
-    def resetuj(self):
+    def resetuj(self) -> None:
         self.x = 700
         self.y = 400
         self.energia = 100

@@ -2,8 +2,11 @@ import pygame as pg
 from ustawienia import *
 
 class Ekran_startowy():
-    
-    def __init__(self, gra):
+    """
+    Ta i następne klasy "ekranowe" reprezentują, to co się będzie wyświetlać w okienku, gdy stan_gry nie równa się "gra".
+    To jest ekran od którego się wszystko zaczyna i tu ląduje gracz, jak chce zagrać ponownie - po wygranej lub przegranej.
+    """
+    def __init__(self, gra) -> None:
         self.gra = gra 
         self.tlo = pg.transform.scale(pg.image.load("tekstury/starter.png").convert(), RES)
         self.przycisk_startu = pg.image.load("spritey/rozpocznijgre_sprite.png").convert_alpha()
@@ -18,7 +21,7 @@ class Ekran_startowy():
         self.parszywek1 = pg.image.load("spritey/parszywek11.png").convert_alpha()   
         self.parszywek2 = pg.image.load("spritey/parszywek2.png").convert_alpha()      
         self.parszywek3 = pg.image.load("spritey/parszywek3.png").convert_alpha()
-        self.parszywki = [
+        self.parszywki = [        #z tej listy korzysta metoda rysuj, żeby obrazki przedstawiające Parszywka się zmieniały (zwykły, mrugający i machający ogonem)
             pg.transform.scale(self.parszywek1, (90, 90)),
             pg.transform.scale(self.parszywek2, (90, 90)),
             pg.transform.scale(self.parszywek3, (90, 90))
@@ -27,7 +30,7 @@ class Ekran_startowy():
         self.zegar = pg.time.get_ticks()
 
 
-    def sprawdz_zdarzenia(self):
+    def sprawdz_zdarzenia(self) -> None:
         mysz_pos = pg.mouse.get_pos()
     
         for zdarz in pg.event.get(): 
@@ -43,7 +46,7 @@ class Ekran_startowy():
         return None
     
     
-    def rysuj(self):
+    def rysuj(self) -> None:
         self.gra.ekran.blit(self.tlo, (0, 0))
         self.gra.ekran.blit(self.przycisk_startu, self.start_rect)
         self.gra.ekran.blit(self.przycisk_jakgrac, self.jakgrac_rect)
@@ -56,14 +59,14 @@ class Ekran_startowy():
 
 
 class Ekran_jakgrac:
-    
-    def __init__(self, gra):
+    """z in strukcjami jak grać"""
+    def __init__(self, gra) -> None:
         self.gra = gra 
         self.tlo = pg.transform.scale(pg.image.load("tekstury/jakgrac.png").convert(), RES)
         #self.tlo = pg.transform.scale(pg.image.load("zasoby/tekstury/jakgrac.png").convert(), RES)
         self.start_rect = pg.Rect(930, 640, 160, 150)
 
-    def sprawdz_zdarzenia(self):
+    def sprawdz_zdarzenia(self) -> None:
         mysz_pos = pg.mouse.get_pos()
         
         for zdarz in pg.event.get(): 
@@ -77,38 +80,38 @@ class Ekran_jakgrac:
 
         return None
     
-    def rysuj(self):
+    def rysuj(self) -> None:
         self.gra.ekran.blit(self.tlo, (0, 0))
         pg.display.flip()
 
 
 class Mapa_wro():
-    def __init__(self, gra):
+    def __init__(self, gra) -> None:
         self.gra = gra 
         self.tlo = pg.transform.scale(pg.image.load("tekstury/mapa.png").convert(), RES)
         #self.tlo = pg.transform.scale(pg.image.load("zasoby/tekstury/mapa.png").convert(), RES)
 
-    def sprawdz_zdarzenia(self):
+    def sprawdz_zdarzenia(self) -> None:
         for zdarz in pg.event.get():
             if zdarz.type == pg.KEYDOWN:
                 if zdarz.key == pg.K_m:
                     self.gra.stan_gry = "gra"
         return None 
 
-    def rysuj(self):
+    def rysuj(self) -> None:
         self.gra.ekran.blit(self.tlo, (0, 0))
         pg.display.flip()
 
 
 class Ekran_gameover():
-    
-    def __init__(self, gra):
+    """To się wyświetla jak graczowi spadnie energia do zera."""
+    def __init__(self, gra) -> None:
         self.gra = gra 
         self.tlo = pg.transform.scale(pg.image.load("tekstury/gameover.png").convert(), RES)
         #self.tlo = pg.transform.scale(pg.image.load("zasoby/tekstury/gameover.png").convert(), RES)
         self.start_znowu_rect = pg.Rect(1000, 630, 120, 120)
 
-    def sprawdz_zdarzenia(self):
+    def sprawdz_zdarzenia(self)-> None:
         mysz_pos = pg.mouse.get_pos()
         
         for zdarz in pg.event.get(): 
@@ -121,13 +124,17 @@ class Ekran_gameover():
 
         return None
     
-    def rysuj(self):
+    def rysuj(self)-> None:
         self.gra.ekran.blit(self.tlo, (0, 0))
         pg.display.flip()
         
 
 class Ekran_wygrana():
-    def __init__(self, gra):
+    """
+    Pojawia się przy kolizji z Siwkiem, gdy ma się wszystkie prezenty - oznacza wygraną.
+    Siwek znajduje się na tym ekranie.
+    """
+    def __init__(self, gra) -> None:
         self.gra = gra
         self.tlo = pg.transform.scale(pg.image.load("tekstury/welldone.png").convert(), RES)
         self.przycisk_restartu_rect = pg.Rect(1000, 630, 120, 120)  
@@ -140,7 +147,7 @@ class Ekran_wygrana():
         self.nr_siwka = 0
         self.zegar = pg.time.get_ticks()
 
-    def sprawdz_zdarzenia(self):
+    def sprawdz_zdarzenia(self) -> None:
         mysz_pos = pg.mouse.get_pos()
 
         for zdarz in pg.event.get():
@@ -153,7 +160,7 @@ class Ekran_wygrana():
 
         return None
 
-    def rysuj(self):
+    def rysuj(self) -> None:
         self.gra.ekran.blit(self.tlo, (0, 0))
         teraz = pg.time.get_ticks()
         if teraz - self.zegar > 300:

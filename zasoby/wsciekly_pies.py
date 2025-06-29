@@ -3,7 +3,10 @@ from ustawienia import *
 import os
 
 class WscieklyPies:
-    def __init__(self, gra, x, y, sciezka_ruch, predkosc=3):
+    """
+    Klasa reprezentująca psa, który porusza się po danej ścieżce i atakuje gracza (- odbiera mu energię).
+    """
+    def __init__(self, gra, x: float, y: float, sciezka_ruch: list[tuple[int, int]], predkosc: float = 3) -> None:
         self.gra = gra
         self.startowe_x = x
         self.startowy_y = y
@@ -32,7 +35,7 @@ class WscieklyPies:
         self.czerwony_obraz.fill((255, 0, 0, 100), special_flags=pg.BLEND_MULT)
         
         
-    def aktualizuj(self):
+    def aktualizuj(self) -> None:
         cel_x, cel_y = self.sciezka_ruch[self.aktualny_cel]
         dx, dy = cel_x - self.x, cel_y - self.y
         odleglosc = (dx**2 + dy**2)**0.5
@@ -68,23 +71,23 @@ class WscieklyPies:
             self.zakoncz_atak()
 
 
-    def rozpocznij_atak(self, czas):
+    def rozpocznij_atak(self, czas) -> None:
         self.aktywny_atak = True
         self.czas_ostatniego_ataku = czas
         self.zadaj_obrazenia()
 
-    def kontynuuj_atak(self, czas):
+    def kontynuuj_atak(self, czas) -> None:
         self.czas_ostatniego_ataku = czas
         self.zadaj_obrazenia()
 
-    def zakoncz_atak(self):
+    def zakoncz_atak(self) -> None:
         if self.aktywny_atak:
             self.aktywny_atak = False
             if not self.czerwony_aktywny:
                 self.gra.gracz.obraz = self.oryginalny_obraz_gracza
 
             
-    def zadaj_obrazenia(self):
+    def zadaj_obrazenia(self)  -> None:
         if not self.sprawdz_kolizje_z_graczem():
             return
             
@@ -95,16 +98,16 @@ class WscieklyPies:
         self.czerwony_aktywny = True
         self.czas_czerwonego = pg.time.get_ticks()
 
-    def sprawdz_kolizje_z_graczem(self):
+    def sprawdz_kolizje_z_graczem(self) -> bool:
         gracz_rect = pg.Rect(self.gra.gracz.x, self.gra.gracz.y, 
                             self.gra.gracz.obraz.get_width(), 
                             self.gra.gracz.obraz.get_height())
-        return self.rect.colliderect(gracz_rect)
+        return self.rect.colliderect(gracz_rect) #koliduje lub nie (prawda/fałsz)
     
-    def rysuj(self):
+    def rysuj(self) -> None:
         self.gra.ekran.blit(self.obraz, (self.x, self.y))
 
-    def resetuj(self):
+    def resetuj(self) -> None:
         self.x = self.startowe_x
         self.y = self.startowy_y
         self.czerwony_aktywny = False
